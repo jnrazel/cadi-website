@@ -1,0 +1,498 @@
+---
+title: ""
+output:
+  html_document:
+    theme: null
+    css: null
+    self_contained: false
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(htmltools)
+library(leaflet)
+
+# Determine if this is observed or projected
+IS_OBSERVED <- (CURRENT_SCENARIO == "observed")
+IS_ABSOLUTE <- (CURRENT_TYPE == "absolute")
+```
+
+```{css, echo=FALSE}
+/* ---- Import CADI base styles inline for standalone pages ---- */
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito Sans', Arial, sans-serif !important;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: #333;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+  padding-top: 56px;
+  text-align: justify;
+}
+
+/* Hide the rmarkdown default title */
+h1.title { display: none; }
+#header { display: none; }
+
+/* ---- Navbar ---- */
+.cadi-navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(255,255,255,0.97);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  font-family: 'Nunito Sans', Arial, sans-serif;
+}
+.cadi-navbar .nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 56px;
+}
+.cadi-navbar .nav-brand {
+  font-size: 1.2rem; font-weight: 800; color: #2c3e50;
+  text-decoration: none; letter-spacing: 0.05em; text-transform: uppercase;
+}
+.cadi-navbar .nav-brand:hover { color: #3498db; text-decoration: none; }
+.cadi-navbar .nav-links {
+  display: flex; list-style: none; margin: 0; padding: 0; gap: 6px;
+}
+.cadi-navbar .nav-links li a {
+  font-size: 0.92rem; font-weight: 600; color: #555; text-decoration: none;
+  text-transform: uppercase; letter-spacing: 0.1em; padding: 8px 14px;
+  border-radius: 4px; transition: color 0.3s, background 0.3s;
+}
+.cadi-navbar .nav-links li a:hover,
+.cadi-navbar .nav-links li a.active {
+  color: #3498db; background: rgba(52,152,219,0.06); text-decoration: none;
+}
+.cadi-navbar .nav-toggle {
+  display: none; background: none; border: none; cursor: pointer; padding: 8px;
+}
+.cadi-navbar .nav-toggle span {
+  display: block; width: 24px; height: 2px; background: #2c3e50; margin: 5px 0;
+}
+@media (max-width: 768px) {
+  .cadi-navbar .nav-toggle { display: block; }
+  .cadi-navbar .nav-links {
+    display: none; flex-direction: column; position: absolute;
+    top: 56px; left: 0; right: 0; background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 12px 0;
+  }
+  .cadi-navbar .nav-links.open { display: flex; }
+  .cadi-navbar .nav-links li a { padding: 12px 24px; font-size: 1rem; }
+}
+
+/* ---- Map explorer layout ---- */
+.map-explorer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 24px;
+}
+
+.map-description {
+  padding: 8px 0 16px 0;
+  margin-bottom: 12px;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #444;
+}
+
+.map-description strong { color: #2c3e50; }
+
+.controls-container {
+  padding: 12px 0;
+  margin-bottom: 16px;
+}
+
+/* Primary toggle: Projected vs Observed */
+.scenario-selector {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.scenario-btn {
+  padding: 10px 22px;
+  border: 2px solid #3498db;
+  background: white;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.3s;
+  text-decoration: none;
+  color: #2c3e50;
+  display: inline-block;
+  font-family: 'Nunito Sans', Arial, sans-serif;
+}
+.scenario-btn:hover {
+  background: #ecf0f1;
+  text-decoration: none;
+}
+.scenario-btn.active {
+  background: #3498db;
+  color: white;
+  border-color: #3498db;
+  pointer-events: none;
+}
+
+/* Secondary toggle: Absolute vs Percentage */
+.toggle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.toggle-btn {
+  padding: 8px 18px;
+  border: 2px solid #95a5a6;
+  background: white;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s;
+  text-decoration: none;
+  color: #2c3e50;
+  display: inline-block;
+  font-family: 'Nunito Sans', Arial, sans-serif;
+}
+.toggle-btn:hover {
+  background: #ecf0f1;
+  text-decoration: none;
+}
+.toggle-btn.active {
+  background: #27ae60;
+  color: white;
+  border-color: #27ae60;
+  pointer-events: none;
+}
+
+/* Slider */
+.slider-container {
+  text-align: center;
+  margin: 8px 0 0;
+  padding: 8px 0;
+}
+
+#time-slider {
+  width: 70%;
+  margin: 12px auto;
+  height: 6px;
+  border-radius: 3px;
+  background: #bdc3c7;
+  outline: none;
+  -webkit-appearance: none;
+}
+#time-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #3498db; cursor: pointer;
+}
+#time-slider::-moz-range-thumb {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #3498db; cursor: pointer; border: none;
+}
+
+#slider-label {
+  font-size: 16px; font-weight: 600; margin: 8px 0; color: #2c3e50;
+}
+
+.period-label {
+  font-size: 16px; font-weight: 600; margin: 0; color: #2c3e50;
+  text-align: center; padding: 12px 0;
+}
+
+/* Map display */
+#map-display {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+#map-display > div {
+  width: 100% !important;
+  height: 600px !important;
+}
+
+/* SSP tooltip */
+.ssp-tooltip {
+  position: relative; display: inline;
+  border-bottom: 1px dashed #3498db; cursor: help; color: #3498db;
+}
+.ssp-tooltip .ssp-tooltip-text {
+  visibility: hidden; width: 340px; background-color: #2c3e50; color: #fff;
+  text-align: left; border-radius: 6px; padding: 12px 16px;
+  position: absolute; z-index: 10; bottom: 125%; left: 50%;
+  transform: translateX(-50%); opacity: 0; transition: opacity 0.3s;
+  font-size: 0.85rem; line-height: 1.5;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); pointer-events: none;
+}
+.ssp-tooltip .ssp-tooltip-text::after {
+  content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px;
+  border-width: 5px; border-style: solid;
+  border-color: #2c3e50 transparent transparent transparent;
+}
+.ssp-tooltip:hover .ssp-tooltip-text {
+  visibility: visible; opacity: 1;
+}
+
+/* Footer */
+.cadi-footer {
+  background: #2c3e50;
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 24px 20px;
+  font-size: 0.9rem;
+  margin-top: 40px;
+}
+.cadi-footer a { color: rgba(255,255,255,0.8); }
+
+/* Override rmarkdown defaults */
+.main-container { max-width: 100%; padding: 0; margin: 0; }
+.container-fluid { padding: 0; }
+.navbar-inverse, .navbar-fixed-top, .navbar { display: none !important; }
+```
+
+```{r, echo=FALSE}
+# ===== NAVBAR =====
+tags$nav(class = "cadi-navbar",
+  tags$div(class = "nav-container",
+    tags$a(href = "index.html", class = "nav-brand", "CADI"),
+    tags$button(class = "nav-toggle", `aria-label` = "Toggle navigation",
+      onclick = "document.querySelector('.nav-links').classList.toggle('open')",
+      tags$span(), tags$span(), tags$span()
+    ),
+    tags$ul(class = "nav-links",
+      tags$li(tags$a(href = "index.html", "Home")),
+      tags$li(tags$a(href = "ssp585_absolute.html", class = "active", "Map Explorer")),
+      tags$li(tags$a(href = "concepts.html", "Concepts")),
+      tags$li(tags$a(href = "about.html", "Methods")),
+      tags$li(tags$a(href = "team.html", "Team")),
+      tags$li(tags$a(href = "partners.html", "Partners"))
+    )
+  )
+)
+```
+
+```{r, echo=FALSE}
+# ===== Description text =====
+if (IS_OBSERVED) {
+  change_type_label <- if(IS_ABSOLUTE) "change" else "percentage change"
+  desc_html <- paste0(
+    'Explore how agricultural productivity has changed\u2014and will continue to change\u2014due to climate change. ',
+    'Use the controls below to switch between observed (historical) and projected (future) changes, ',
+    'and to toggle between absolute and percentage metrics.',
+    '<br><br>',
+    '<strong>Currently viewing:</strong> Observed ', change_type_label,
+    ' in agricultural productivity due to climate change from the 1981\u20132000 baseline to the 2001\u20132020 period, ',
+    'based on historical climate data (AGERA5). Values represent the ',
+    if(IS_ABSOLUTE) 'change in the number of people that can be fed per grid cell (based on 2,000 calories per person per day).'
+    else 'percentage change in the number of people that can be fed per grid cell.'
+  )
+} else {
+  change_type_label <- if(IS_ABSOLUTE) "change" else "percentage change"
+  desc_html <- paste0(
+    'Explore how agricultural productivity has changed\u2014and will continue to change\u2014due to climate change. ',
+    'Use the controls below to switch between observed (historical) and projected (future) changes, ',
+    'and to toggle between absolute and percentage metrics.',
+    '<br><br>',
+    '<strong>Currently viewing:</strong> Projected ', change_type_label,
+    ' in agricultural productivity under the ',
+    '<span class="ssp-tooltip">SSP5-8.5 scenario',
+    '<span class="ssp-tooltip-text">The SSP5-8.5 is a high-emissions pathway assuming continued fossil fuel reliance throughout the 21st century. ',
+    'It has been chosen because it is the only scenario with projections consistent with the magnitude of changes already observed since 1981\u20132000.</span></span>. ',
+    'Use the slider to explore different time horizons. Values represent the ',
+    if(IS_ABSOLUTE) 'change in the number of people that can be fed per grid cell, relative to the 2001\u20132020 baseline.'
+    else 'percentage change in the number of people that can be fed per grid cell, relative to the 2001\u20132020 baseline.'
+  )
+}
+
+tags$div(class = "map-explorer-container",
+  tags$div(class = "map-description", HTML(desc_html))
+)
+```
+
+
+```{r, echo=FALSE}
+# ===== Controls =====
+tags$div(class = "map-explorer-container", style = "padding-top: 0;",
+  tags$div(class = "controls-container",
+    
+    # Primary toggle
+    tags$div(class = "scenario-selector",
+      tags$a(
+        class = paste0("scenario-btn", if(!IS_OBSERVED) " active" else ""),
+        href = if(IS_OBSERVED) paste0("ssp585_", CURRENT_TYPE, ".html") else "javascript:void(0)",
+        paste0("Projected (2021", "\u2013", "2100)")
+      ),
+      tags$a(
+        class = paste0("scenario-btn", if(IS_OBSERVED) " active" else ""),
+        href = if(!IS_OBSERVED) paste0("observed_", CURRENT_TYPE, ".html") else "javascript:void(0)",
+        paste0("Observed (2001", "\u2013", "2020)")
+      )
+    ),
+    
+    # Secondary toggle
+    tags$div(class = "toggle-container",
+      tags$a(
+        class = paste0("toggle-btn", if(IS_ABSOLUTE) " active" else ""),
+        href = if(!IS_ABSOLUTE) paste0(CURRENT_SCENARIO, "_absolute.html") else "javascript:void(0)",
+        "Absolute Change"
+      ),
+      tags$a(
+        class = paste0("toggle-btn", if(!IS_ABSOLUTE) " active" else ""),
+        href = if(IS_ABSOLUTE) paste0(CURRENT_SCENARIO, "_relative.html") else "javascript:void(0)",
+        "Percentage Change"
+      )
+    ),
+    
+    # Slider or period label
+    if (!IS_OBSERVED) {
+      tags$div(class = "slider-container",
+        tags$div(id = "slider-label",
+          "Change from 2001\u20132020 to ",
+          tags$span(id = "period-text", "2041\u20132060")
+        ),
+        tags$input(type = "range", min = "1", max = "4", value = "2", id = "time-slider")
+      )
+    } else {
+      tags$div(class = "period-label",
+        "Change from 1981\u20132000 to 2001\u20132020"
+      )
+    }
+  )
+)
+```
+
+```{r, include = FALSE}
+source("leaflet_comparable.R", local = TRUE)
+
+if (IS_OBSERVED) {
+  if (IS_ABSOLUTE) {
+    tifs <- absolute_tifs_observed
+  } else {
+    tifs <- relative_tifs_observed
+  }
+  
+  change_label <- if(IS_ABSOLUTE) "Absolute PFY Change" else "Percentage Change"
+  map_observed <- leaflet_function_comparable(tifs[1], 
+                              paste0(change_label, " (2001\u20132020 vs 1981\u20132000)"),
+                              ifelse(IS_ABSOLUTE, "pfy", "growth")) %>%
+    htmlwidgets::onRender("function(el, x) { el.style.height = '600px'; }")
+  
+} else {
+  time_periods <- c("2021\u20132040", "2041\u20132060", "2061\u20132080", "2081\u20132100")
+  
+  if (IS_ABSOLUTE) {
+    tifs <- absolute_tifs_585
+  } else {
+    tifs <- relative_tifs_585
+  }
+  
+  maps <- list()
+  for(i in 1:4) {
+    change_label <- if(IS_ABSOLUTE) "Absolute PFY Change" else "Percentage Change"
+    maps[[i]] <- leaflet_function_comparable(tifs[i], 
+                                  paste0(change_label, " (", time_periods[i], ")"),
+                                  ifelse(IS_ABSOLUTE, "pfy", "growth")) %>%
+      htmlwidgets::onRender("function(el, x) { el.style.height = '600px'; }")
+  }
+}
+```
+
+```{r, echo=FALSE}
+# Display the map(s) - default to 2041-2060 (index 2) for projected
+tags$div(class = "map-explorer-container", style = "padding-top: 0;",
+  if (IS_OBSERVED) {
+    tags$div(id = "map-display", map_observed)
+  } else {
+    tags$div(id = "map-display", maps[[2]])
+  }
+)
+```
+
+```{r, echo=FALSE}
+# Store other maps in hidden container (only for projected)
+if (!IS_OBSERVED) {
+  tags$div(id = "map-storage", style = "display:none;",
+    tags$div(id = "stored-map1", maps[[1]]),
+    tags$div(id = "stored-map2", maps[[2]]),
+    tags$div(id = "stored-map3", maps[[3]]),
+    tags$div(id = "stored-map4", maps[[4]])
+  )
+}
+```
+
+```{r, echo=FALSE}
+# Legend
+legend_title <- if(IS_ABSOLUTE) "People Fed Yearly \u2013 Absolute Change" else "Percentage Change in People Fed Yearly"
+legend_type <- if(IS_ABSOLUTE) "pfy" else "growth"
+
+tags$div(class = "map-explorer-container", style = "padding-top: 0;",
+  tags$div(
+    style = "text-align: center; margin-top: 20px;",
+    create_legend_html_horizontal(variable_type = legend_type, title = legend_title)
+  )
+)
+```
+
+<!-- Footer -->
+<footer class="cadi-footer">
+  <p>&copy; 2026 CADI Project. Climate-Driven Agricultural Decline Index.</p>
+</footer>
+
+```{js, echo=FALSE}
+// Slider logic - default is position 2 (2041-2060)
+const slider = document.getElementById('time-slider');
+
+if (slider) {
+  const periodText = document.getElementById('period-text');
+  const timePeriods = ['2021\u20132040', '2041\u20132060', '2061\u20132080', '2081\u20132100'];
+  const mapDisplay = document.getElementById('map-display');
+  
+  // Store the map HTML - default shown is map 2 (2041-2060)
+  const storedMaps = {};
+  storedMaps[1] = document.getElementById('stored-map1').innerHTML;
+  storedMaps[2] = document.getElementById('stored-map2').innerHTML;
+  storedMaps[3] = document.getElementById('stored-map3').innerHTML;
+  storedMaps[4] = document.getElementById('stored-map4').innerHTML;
+  
+  slider.addEventListener('input', function() {
+    const value = parseInt(this.value);
+    
+    mapDisplay.innerHTML = storedMaps[value];
+    periodText.textContent = timePeriods[value - 1];
+    
+    setTimeout(function() {
+      if(window.HTMLWidgets) {
+        HTMLWidgets.staticRender();
+      }
+      const widget = mapDisplay.querySelector('[id^="htmlwidget-"]');
+      if(widget && window.HTMLWidgets) {
+        const leafletWidget = window.HTMLWidgets.find('#' + widget.id);
+        if(leafletWidget) {
+          leafletWidget.getMap().invalidateSize();
+        }
+      }
+    }, 100);
+  });
+}
+```

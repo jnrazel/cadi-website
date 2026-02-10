@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CADI – Methods</title>
+  <link rel="stylesheet" href="css/cadi-style.css">
+  <script type="text/javascript" src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body class="has-navbar">
+
+<!-- ===== Navbar ===== -->
+<nav class="cadi-navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-brand">CADI</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="ssp585_absolute.html">Map Explorer</a></li>
+      <li><a href="concepts.html">Concepts</a></li>
+      <li><a href="about.html" class="active">Methods</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="partners.html">Partners</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="cadi-section">
+
+  <div class="section-heading">
+    <h2>Methods</h2>
+  </div>
+
+  <p>We quantify <strong>climate-driven changes in agricultural production potential</strong> on a global 10×10 km grid. For each grid cell, we take the <strong>cropping patterns observed at 2020</strong>—which crops were grown and how much area each occupied—and hold them fixed. We then calculate how the <strong>attainable yield</strong> of these same crops changes across different time periods: a baseline (1981–2000), the recent observed period (2001–2020), and future time periods under the SSP5-8.5 climate scenario. By keeping the crop mix constant while climate conditions vary, we isolate the direct impact of climate change on agricultural productivity.</p>
+
+  <h3>Conceptual Framework</h3>
+
+  <p>Agricultural output in any location depends on three factors: (1) <strong>climate conditions</strong> (temperature, precipitation, growing season characteristics), (2) <strong>cropping patterns</strong> (which crops are grown and how much area each occupies), and (3) <strong>agronomic management</strong> (input intensity, irrigation, technology).</p>
+
+  <p>Our approach isolates the climate component by holding the other two factors constant:</p>
+
+  <ul>
+    <li><strong>Fixed cropping pattern</strong>: We use the actual distribution of crops and harvested areas from 2020 as our reference. This same crop mix is applied to all time periods and scenarios.</li>
+    <li><strong>Fixed management assumption</strong>: We use GAEZ attainable yield estimates, which reflect a consistent management level (input intensity and water regime) across all scenarios.</li>
+  </ul>
+
+  <p>With this design, any differences in production across time periods or scenarios reflect pure <strong>climate-driven changes in yield potential</strong>—not adaptation through crop switching, irrigation expansion, or technological change.</p>
+
+  <p>Think of this as answering: <em>"What would happen to agricultural productivity if farmers kept growing exactly the same crops in the same proportions as they did in 2020, but faced the climate conditions of 2030, 2050, or 2080?"</em></p>
+
+  <p>This "no-adaptation" scenario establishes a baseline for measuring the adaptation challenge communities face.</p>
+
+  <h3>Data Sources</h3>
+
+  <p><strong>Attainable yields</strong>: We use GAEZ v5 gridded <strong>attainable yield</strong> estimates under historical and future climate scenarios. Attainable yield represents the <strong>maximum productivity achievable given the climate and soil conditions</strong> of each grid cell, assuming a specified management level. It accounts for climate factors (temperature, precipitation, solar radiation, growing season), soil characteristics (nutrients, texture, depth, drainage), terrain constraints (slope, elevation), and crop physiology and growth requirements.</p>
+
+  <p>Attainable yield is adjusted downward from theoretical "potential yield" to reflect realistic site-specific limitations, making it a more credible benchmark than pure agro-climatic potential.</p>
+
+  <p><strong>Cropping patterns</strong>: We use the <strong>observed distribution of crops and harvested areas from 2020</strong> as our baseline reference period. This captures which crops were actually grown in each location and how much area each crop occupied during that period.</p>
+
+  <p>All spatial layers are harmonised to a common 10×10 km grid resolution and standardised crop definitions before calculation.</p>
+
+  <h3>Cell-Level Production Calculation</h3>
+
+  <p>Let \(A_{i,c}\) denote the harvested area (ha) of crop \(c\) in cell \(i\), taken from the baseline year and held fixed. Let \(Y_{i,c}(s,t)\) denote the GAEZ yield estimate (e.g., tonnes/ha) for scenario \(s\) and time period \(t\) under the chosen management setting.</p>
+
+  <p>We compute total (mass) output in cell \(i\) as:</p>
+
+  <p>$$\Theta_i(s,t) = \sum_{c} A_{i,c} \, Y_{i,c}(s,t).$$</p>
+
+  <h3>Caloric Output and People Fed Yearly (PFY)</h3>
+
+  <p>To aggregate across crops in a common unit, we convert crop output into calories using a crop-specific calorie conversion factor \(\kappa_c\) (kcal per tonne):</p>
+
+  <p>$$C_i(s,t) = \sum_{c} A_{i,c} \, Y_{i,c}(s,t) \, \kappa_c.$$</p>
+
+  <p>We then convert annual calories to <strong>People Fed Yearly (PFY)</strong> using a reference daily requirement \(c_{\min}\) (kcal/person/day):</p>
+
+  <p>$$\text{PFY}_i(s,t) = \frac{C_i(s,t)}{c_{\min} \cdot 365}.$$</p>
+
+  <p>In practice we use \(c_{\min}=2000\) kcal/person/day as a standard reference value.</p>
+
+  <h3>Change Metrics</h3>
+
+  <p>Let \((s_0,t_0)\) denote the baseline scenario and baseline period. We report:</p>
+
+  <ul>
+    <li><strong>Absolute change:</strong> \(\Delta \Theta_i(s,t) = \Theta_i(s,t) - \Theta_i(s_0,t_0)\)</li>
+    <li><strong>Percentage change:</strong> \(\Delta \Theta_i(s,t) \;/\; \Theta_i(s_0,t_0)\)</li>
+  </ul>
+
+  <p>(and analogously for \(C_i\) and \(\text{PFY}_i\)).</p>
+
+</div>
+
+<!-- ===== Footer ===== -->
+<footer class="cadi-footer">
+  <p>&copy; 2026 CADI Project. Climate-Driven Agricultural Decline Index.</p>
+</footer>
+
+</body>
+</html>

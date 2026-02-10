@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CADI – Climate-Driven Agricultural Decline Index</title>
+  <link rel="stylesheet" href="css/cadi-style.css">
+</head>
+<body class="has-navbar">
+
+<!-- ===== Navbar ===== -->
+<nav class="cadi-navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-brand">CADI</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="ssp585_absolute.html">Map Explorer</a></li>
+      <li><a href="concepts.html">Concepts</a></li>
+      <li><a href="about.html">Methods</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="partners.html">Partners</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== Hero Section ===== -->
+<section class="cadi-hero" style="background-image: url('map_absolute_4160.png');">
+  <div class="cadi-hero-content">
+    <div class="hero-abbrev">CADI</div>
+    <div class="hero-title">Climate-Driven Agricultural Decline Index</div>
+    <div class="hero-subtitle">
+      Where will climate change hit agriculture hardest? This tool maps productivity losses for local crops at 10&nbsp;km resolution under the SSP5-8.5 high-emissions scenario.
+    </div>
+  </div>
+</section>
+
+<!-- ===== Intro Text ===== -->
+<div class="cadi-section">
+
+  <p>Climate change poses an existential threat to agricultural communities worldwide. Rising temperatures, shifting rainfall patterns, and increased weather variability will fundamentally alter where and how crops can be grown—with the poorest and most vulnerable communities facing the greatest burden.</p>
+
+  <!-- ===== Our Headline Findings ===== -->
+  <div class="section-heading">
+    <h2>Our Headline Findings</h2>
+  </div>
+  <p style="text-align:center; color:#666; margin-top:-10px;">Projected changes for the 2041–2060 period under SSP5-8.5, relative to the 2001–2020 baseline</p>
+
+  <div class="findings-grid">
+    <div class="finding-card">
+      <div class="finding-number">1.01 billion</div>
+      <div class="finding-text">people affected by at least a 15% decline in People Fed Yearly (PFY) in their grid cell.</div>
+    </div>
+    <div class="finding-card">
+      <div class="finding-number">Regional asymmetry</div>
+      <div class="finding-text">Of those affected, a large majority are in Asia (655&nbsp;million), followed by Africa (192&nbsp;million).</div>
+    </div>
+    <div class="finding-card">
+      <div class="finding-number">2.56 billion</div>
+      <div class="finding-text">people affected in cells with an absolute change exceeding &minus;5,000 People Fed Yearly.</div>
+    </div>
+    <div class="finding-card">
+      <div class="finding-number">Worst-off countries</div>
+      <div class="finding-text">The three highest-losing countries are India (300&nbsp;M PFY), Brazil (80&nbsp;M PFY), and Pakistan (65&nbsp;M PFY).</div>
+    </div>
+  </div>
+
+  <!-- ===== Baseline Definition ===== -->
+  <div class="baseline-box">
+    <h3>How We Define the Baseline</h3>
+    <p>Our analysis separates <strong>already observed change</strong> from <strong>future projections</strong>. We measure the change that has already occurred by comparing the 1981–2000 baseline to the 2001–2020 period using observed climate data (AGERA5). Future projections are then measured relative to the 2001–2020 baseline, under the SSP5-8.5 high-emissions scenario—the only scenario whose projections are consistent with the magnitude of changes already observed since 1981–2000.</p>
+
+    <div class="baseline-timeline">
+      <div class="timeline-block past">1981–2000<br><small>Historical baseline</small></div>
+      <div class="timeline-arrow">→</div>
+      <div class="timeline-block baseline">2001–2020<br><small>Observed change &amp; new baseline</small></div>
+      <div class="timeline-arrow">→</div>
+      <div class="timeline-block future">2021–2100<br><small>Projected under SSP5-8.5</small></div>
+    </div>
+  </div>
+
+  <!-- ===== Main body text ===== -->
+  <p>This project provides spatially disaggregated estimates of agricultural productivity changes across multiple time periods. Using agronomic models from the Global Agro-Ecological Zones (GAEZ v5) project, we quantify productivity losses using attainable yields under a "no-adaptation" scenario—assuming farmers maintain current crop choices and practices. These benchmarks reveal where adaptation will be most critical.</p>
+
+  <div class="section-heading mt-4">
+    <h2>Why This Matters</h2>
+  </div>
+
+  <p>The productivity decline in agriculture due to climate change will not be equally distributed across the planet. While some areas will gain, others will be severely affected. For many low-income regions, adaptation to these negative changes is not a given. Smallholder farmers often lack access to capital, technology, or information needed to respond to changing growing conditions. When productivity falls, the consequences extend far beyond agriculture: food insecurity rises, rural incomes collapse, and communities face difficult choices about migration and livelihood transitions.</p>
+
+  <p>This webpage is designed as an <strong>early warning tool</strong> for local policymakers, development practitioners, and researchers. By identifying regions and communities that will experience severe productivity losses under current planting patterns, we aim to support:</p>
+
+  <ul>
+    <li><strong>Targeted adaptation planning</strong>: prioritising resources and interventions in the most vulnerable areas</li>
+    <li><strong>Agricultural policy design</strong>: informing decisions about crop research, extension services, and rural development</li>
+    <li><strong>Climate justice advocacy</strong>: documenting the highly unequal distribution of climate damages</li>
+  </ul>
+
+  <div class="section-heading mt-4">
+    <h2>The Adaptation Challenge</h2>
+  </div>
+
+  <p>For wealthy farmers and countries, adaptation may be achievable through technology, crop switching, or even geographic relocation of production. For smallholder farmers in low-income regions, these options are often unavailable. The result: climate change threatens both food security and rural livelihoods precisely where resilience is lowest.</p>
+
+  <p>Understanding the local magnitude of productivity losses is essential for designing effective adaptation strategies—and for recognising the urgent need for both emissions reductions and international climate finance. We hope this tool contributes to a more informed, evidence-based conversation about climate adaptation, international cooperation, and climate justice.</p>
+
+</div>
+
+<!-- ===== Footer ===== -->
+<footer class="cadi-footer">
+  <p>&copy; 2026 CADI Project. Climate-Driven Agricultural Decline Index.</p>
+</footer>
+
+</body>
+</html>
