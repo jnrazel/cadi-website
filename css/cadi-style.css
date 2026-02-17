@@ -232,7 +232,7 @@ li {
 
 /* ---------- Content Sections ---------- */
 .cadi-section {
-  max-width: 900px;
+  max-width: 950px;
   margin: 0 auto;
   padding: 60px 30px;
 }
@@ -293,7 +293,7 @@ li {
 }
 
 .finding-card .finding-text {
-  font-size: 1rem;
+  font-size: 0.8em;
   color: #444;
   line-height: 1.6;
   text-align: left;
@@ -312,12 +312,12 @@ li {
   color: #2c3e50;
   margin-top: 0;
   margin-bottom: 12px;
-  font-size: 1.25rem;
+  font-size: 1.6em;
 }
 
 .baseline-box p {
   margin-bottom: 0.6em;
-  font-size: 1rem;
+  font-size: inherit;
 }
 
 .baseline-timeline {
@@ -333,7 +333,7 @@ li {
   text-align: center;
   padding: 12px 18px;
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: 0.85em;
   font-weight: 600;
   min-width: 140px;
 }

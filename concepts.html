@@ -35,69 +35,72 @@
 
   <p>This page explains the main terms and ideas behind the CADI maps. For a full technical description of our methodology, see the <a href="about.html">Methods</a> page.</p>
 
-  <!-- ===== What the maps show ===== -->
-  <h3>What the Maps Show</h3>
-  <p>Our maps display how much agricultural productivity changes—or is projected to change—in each 10&nbsp;km grid cell around the world. We show two types of change:</p>
-  <ul>
-    <li><strong>Absolute change</strong> in People Fed Yearly (PFY): the difference in the number of people a cell could feed between two time periods. A value of &minus;5,000 means the cell can feed 5,000 fewer people per year.</li>
-    <li><strong>Percentage change</strong> in People Fed Yearly: the same change expressed as a percentage of the baseline value. A value of &minus;25% means the cell lost a quarter of its food-producing capacity.</li>
-  </ul>
-  <p>Two views are available:</p>
-  <ul>
-    <li><strong>Observed (2001–2020):</strong> What has already happened. Compares 2001–2020 to the 1981–2000 baseline, using observed climate data (AGERA5).</li>
-    <li><strong>Projected (2021–2100):</strong> What climate models predict will happen. Compares future periods to the 2001–2020 baseline, under the SSP5-8.5 scenario. A slider lets you explore four time horizons: 2021–2040, 2041–2060, 2061–2080, and 2081–2100.</li>
-  </ul>
-
-  <br>
-
-  <!-- ===== People Fed Yearly ===== -->
-  <h3>People Fed Yearly (PFY)</h3>
-  <p>People Fed Yearly is a way to express how much food a grid cell produces in terms of how many people it could feed for a whole year. It converts the total calories produced into a simple, intuitive number:</p>
-  <p style="text-align:center;">
-    $$\text{PFY} = \frac{\text{Total calories produced per year}}{2{,}000 \;\text{kcal/day} \times 365 \;\text{days}}$$
-  </p>
-  <p>We use 2,000 kcal per person per day as the reference—a widely used adult guideline in both EU and US nutrition labelling.</p>
-  <p><strong>Important:</strong> PFY is a simplified energy-only metric. It does not account for diet composition, food waste, market access, or trade. It tells you how much caloric energy a place <em>could</em> produce, not how many people it actually feeds.</p>
-
-  <br>
-
   <!-- ===== Attainable Yield ===== -->
-  <h3>Attainable Yield</h3>
+  <h3 id="attainable-yield">Attainable Yield</h3>
   <p>Attainable yield is the realistic upper limit of what a crop can produce in a given location, considering climate, soil, and terrain. It comes from the <a href="https://gaez.fao.org" target="_blank">FAO/IIASA Global Agro-Ecological Zones (GAEZ)</a> model and is the key building block for our maps.</p>
   <p>Attainable yield accounts for: temperature and rainfall patterns, solar radiation and growing season length, soil quality (nutrients, texture, depth, drainage), and terrain constraints (slope, elevation).</p>
   <p><strong>What attainable yield is not:</strong> It is <em>not</em> an observation of what farmers actually harvest. It does not capture market conditions, farmer decisions, conflict, policy, or any socioeconomic factor. It represents what <em>could</em> be grown under a given climate and soil, assuming a consistent level of farm management. This makes it ideal for isolating the climate signal—but it should not be confused with actual production data.</p>
 
   <br>
 
-  <!-- ===== Caloric Yield ===== -->
-  <h3>Caloric Yield</h3>
-  <p>Different crops produce different amounts of food energy per hectare. Caloric yield converts crop-specific yields (e.g., tonnes of wheat per hectare) into a common unit: kilocalories per hectare per year (kcal/ha/year). This allows us to compare productivity across crops and regions, and to aggregate output from multiple crops within a single grid cell.</p>
+  <!-- ===== Caloric Production Equivalent ===== -->
+  <h3 id="caloric-yield">Caloric Production Equivalent</h3>
+  <p>Different crops produce different amounts of food energy per hectare. To compare productivity across crops and regions, we convert crop-specific attainable yields (e.g., tonnes of wheat per hectare) into a common unit: <strong>kilocalories per hectare per year</strong> (kcal/ha/year). This caloric yield allows us to aggregate the output from multiple crops within a single grid cell into a single measure of caloric production potential.</p>
 
   <br>
 
-  <!-- ===== Climate Scenario: SSP5-8.5 ===== -->
-  <h3>Climate Scenario: SSP5-8.5</h3>
-  <p>For future projections, we use a single climate scenario: <strong>SSP5-8.5</strong>. This is a high-emissions pathway that assumes continued reliance on fossil fuels throughout the 21st century, leading to roughly 4.4°C of warming by the end of the century (range: 3.3–5.7°C).</p>
-  <p><strong>Why SSP5-8.5?</strong> We chose this scenario because it is the only one whose projections are broadly consistent with the magnitude of agricultural productivity changes already observed between 1981–2000 and 2001–2020. The scenario projections for climate were calibrated on 1981–2000 data, and comparing their near-term forecasts to actual observed changes shows that SSP5-8.5 most closely matches reality so far. Lower-emissions scenarios (such as SSP1-2.6) project smaller changes that are not consistent with what has already been observed.</p>
-  <p>This does <em>not</em> mean we endorse or predict this emissions path—it means it currently provides the most empirically grounded basis for projecting forward from recent observed trends.</p>
+  <!-- ===== People Fed Yearly ===== -->
+  <h3 id="pfy">People Fed Yearly (PFY)</h3>
+  <p>People Fed Yearly is a way to express how much food a grid cell can produce in terms of how many people it could feed for a whole year. It converts the total caloric production potential into a simple, intuitive number:</p>
+  <p style="text-align:center;">
+    $$\text{PFY} = \frac{\text{Total calories that can be produced per year}}{2{,}000 \;\text{kcal/day} \times 365 \;\text{days}}$$
+  </p>
+  <p>We use 2,000 kcal per person per day as the reference—a widely used adult guideline in both EU and US nutrition labelling.</p>
+  <p><strong>Important:</strong> PFY is a simplified energy-only metric. It does not account for diet composition, food waste, market access, or trade. It tells you how much caloric energy a place <em>could</em> produce, not how many people it actually feeds.</p>
 
-  <br>
-
-  <!-- ===== Absolute vs Percentage Change ===== -->
-  <h3>Absolute Change vs. Percentage Change</h3>
-  <p>We provide two complementary ways to look at agricultural productivity changes:</p>
+  <p>We report changes in PFY in two complementary ways:</p>
   <ul>
-    <li><strong>Absolute change (in PFY):</strong> The raw difference in people that can be fed. This highlights where the largest <em>total</em> losses occur—typically in highly productive agricultural areas.</li>
-    <li><strong>Percentage change (in PFY):</strong> The proportional change relative to the baseline. This highlights where losses are most <em>severe relative to what was produced before</em>—often in areas that were already marginal.</li>
+    <li><strong>Absolute change (in PFY):</strong> The raw difference in the number of people a cell could feed between two time periods. This highlights where the largest <em>total</em> losses occur—typically in highly productive agricultural areas. For example, a value of &minus;5,000 means the cell can feed 5,000 fewer people per year.</li>
+    <li><strong>Percentage change (in PFY):</strong> The proportional change relative to the baseline. This highlights where losses are most <em>severe relative to what could be produced before</em>—often in areas that were already marginal. For example, &minus;25% means the cell lost a quarter of its food-producing capacity.</li>
   </ul>
   <p>Both metrics matter. A 50% loss in a low-productivity region may be catastrophic for local food security even if the absolute numbers are small. Conversely, a 5% loss in a breadbasket region can affect millions of people.</p>
+
+  <br>
+
+  <!-- ===== What the Maps Show ===== -->
+  <h3 id="maps">What the Maps Show</h3>
+  <p>Our maps display how much agricultural productivity changes—or is projected to change—in each 10&nbsp;km grid cell around the world. Two views are available:</p>
+  <ul>
+    <li><strong>Observed (2001–2020):</strong> What has already happened. Compares attainable yields under the 2001–2020 climate to the 1981–2000 baseline, using observed climate data (AgERA5).</li>
+    <li><strong>Projected (2021–2100):</strong> What climate models project will happen. Compares future periods to the 2001–2020 baseline, under the SSP5-8.5 scenario. A slider lets you explore four time horizons: 2021–2040, 2041–2060, 2061–2080, and 2081–2100.</li>
+  </ul>
+  <p>In all cases, cropping patterns—which crops are grown and how much area each occupies—are held fixed at their observed year-2020 distribution. Only climate conditions vary across time periods, so any differences represent the pure climate-driven change in production potential.</p>
+
+  <br>
+
+  <!-- ===== Climate Scenarios: IPCC SSPs ===== -->
+  <h3 id="climate-scenarios">Climate Scenarios: IPCC Shared Socioeconomic Pathways (SSPs)</h3>
+  <p>The <strong>Shared Socioeconomic Pathways (SSPs)</strong> are a set of scenarios developed for the IPCC Sixth Assessment Report. They describe plausible futures for global development and greenhouse gas emissions, spanning different challenges to <strong>mitigation</strong> and <strong>adaptation</strong>.</p>
+  <p>Scenario labels such as <strong>SSP1-2.6</strong>, <strong>SSP3-7.0</strong>, and <strong>SSP5-8.5</strong> combine a socioeconomic storyline with a forcing pathway targeting an approximate <strong>radiative forcing level in 2100</strong> (2.6, 7.0, or 8.5 W/m²). Key scenarios include:</p>
+  <ul>
+    <li><strong>SSP1-2.6</strong> ("Sustainability"): Low-emissions pathway. Assessed end-of-century warming: <strong>1.8°C</strong> (very likely range: 1.3–2.4°C).</li>
+    <li><strong>SSP3-7.0</strong> ("Regional Rivalry"): High-emissions pathway. Assessed end-of-century warming: <strong>3.6°C</strong> (very likely range: 2.8–4.6°C).</li>
+    <li><strong>SSP5-8.5</strong> ("Fossil-fuelled Development"): Very high-emissions pathway. Assessed end-of-century warming: <strong>4.4°C</strong> (very likely range: 3.3–5.7°C).</li>
+  </ul>
+
+  <br>
+
+  <!-- ===== Why SSP5-8.5 ===== -->
+  <h3 id="why-ssp585">Why We Use SSP5-8.5</h3>
+  <p>For future projections, we use a single climate scenario: <strong>SSP5-8.5</strong>. We chose this scenario because it is the only one whose projections are broadly consistent with the magnitude of agricultural productivity changes already observed between 1981–2000 and 2001–2020. The climate projections in GAEZ were calibrated on the 1981–2000 period, and comparing their near-term forecasts to actual observed changes shows that SSP5-8.5 most closely matches reality so far. Lower-emissions scenarios (such as SSP1-2.6) project smaller changes that are not consistent with what has already been observed.</p>
+  <p>This does <em>not</em> mean we endorse or predict this emissions path—it means it currently provides the most empirically grounded basis for projecting forward from recent observed trends.</p>
 
 </div><!-- end cadi-section -->
 
 <!-- ===== Separator ===== -->
 <hr style="max-width:900px; margin: 0 auto;">
 
-<!-- ===== Original Technical Content (preserved below) ===== -->
+<!-- ===== Technical Reference ===== -->
 <div class="cadi-section">
 
   <div class="section-heading">
@@ -107,15 +110,15 @@
   <p><em>The sections below provide additional technical detail on the terms used in the maps and indicators.</em></p>
 
   <h3>People Fed Yearly (PFY)</h3>
-  <p><strong>People Fed Yearly (PFY)</strong> translates annual calories into an approximate number of "people-fed equivalents" per year:</p>
+  <p><strong>People Fed Yearly (PFY)</strong> translates annual caloric production potential into an approximate number of "people-fed equivalents" per year:</p>
   <p>$$\text{PFY}=\frac{C_{\text{year}}}{c_{\min}\cdot 365},$$</p>
-  <p>where \(C_{\text{year}}\) is total kilocalories produced per year in a grid cell and \(c_{\min}\) is a reference daily calorie requirement (kcal/person/day).</p>
+  <p>where \(C_{\text{year}}\) is total kilocalories that can be produced per year in a grid cell and \(c_{\min}\) is a reference daily calorie requirement (kcal/person/day).</p>
   <p>In practice we use \(c_{\min}=2000\) <strong>kcal/person/day</strong>, a widely used adult <strong>reference intake</strong> in nutrition labelling (EU: 8,400 kJ / 2,000 kcal; US FDA: 2,000 calories/day as general guidance).</p>
   <p>PFY is an energy-only normalisation: it does not account for diet composition, food waste, access, or trade.</p>
 
   <h3>Caloric Yield</h3>
-  <p><strong>Caloric yield</strong> expresses crop yields in a common unit of dietary energy, typically <strong>kilocalories per hectare per year (kcal/ha/year)</strong>. It converts crop-specific yields (e.g., tonnes/ha) into kilocalories using crop energy content tables, which allows comparison across crops and regions.</p>
-  <p>In this project, caloric yield is computed from <strong>GAEZ potential or attainable yields</strong> under a given climate and management scenario, converted to kilocalories, and (when needed) aggregated across crops using an assumed crop mix within each grid cell.</p>
+  <p><strong>Caloric yield</strong> expresses crop attainable yields in a common unit of dietary energy, typically <strong>kilocalories per hectare per year (kcal/ha/year)</strong>. It converts crop-specific attainable yields (e.g., tonnes/ha) into kilocalories using crop energy content tables, which allows comparison across crops and regions.</p>
+  <p>In this project, caloric yield is computed from <strong>GAEZ attainable yields</strong> under a given climate and management scenario, converted to kilocalories, and (when needed) aggregated across crops using the observed crop mix within each grid cell.</p>
 
   <h3>Yield Variables in GAEZ</h3>
   <p>GAEZ distinguishes different yield levels:</p>

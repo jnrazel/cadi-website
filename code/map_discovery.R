@@ -3,6 +3,9 @@
 # + Generate static map images for the landing page
 # =============================================================================
 
+# Set working directory to the location of this script
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
 library(raster)
 library(terra)
 library(cmocean)
