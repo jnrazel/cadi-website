@@ -230,6 +230,67 @@ li {
   }
 }
 
+/* ---------- Mobile: scale down large fonts ---------- */
+@media (max-width: 768px) {
+  /* Override inline font-size on home page cadi-section */
+  .cadi-section {
+    font-size: 17px !important;
+    line-height: 1.65 !important;
+  }
+
+  .cadi-hero-content .hero-abbrev {
+    font-size: 2.8rem !important;
+  }
+  .cadi-hero-content .hero-title,
+  .cadi-hero-content .hero-title span {
+    font-size: 1.2rem !important;
+  }
+  .cadi-hero-content .hero-subtitle,
+  .cadi-hero-content .hero-subtitle span {
+    font-size: 0.95rem !important;
+  }
+
+  .baseline-box {
+    font-size: 15px !important;
+    padding: 18px 20px;
+  }
+  .baseline-box h3 {
+    font-size: 1.25em !important;
+  }
+  .baseline-timeline {
+    font-size: 13px !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .timeline-block {
+    min-width: 90px;
+    padding: 8px 10px;
+  }
+  .timeline-arrow {
+    transform: rotate(90deg);
+    padding: 2px 0;
+  }
+
+  .finding-card .finding-number {
+    font-size: 1.3rem;
+  }
+  .finding-card .finding-text {
+    font-size: 0.9em;
+  }
+
+  .section-heading h2 {
+    font-size: 1.3rem;
+  }
+
+  .findings-grid {
+    gap: 16px;
+  }
+  .finding-card {
+    padding: 18px 20px;
+  }
+}
+
 /* ---------- Content Sections ---------- */
 .cadi-section {
   max-width: 950px;

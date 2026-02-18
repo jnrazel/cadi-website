@@ -196,19 +196,20 @@ h1.title { display: none; }
 #time-slider {
   width: 70%;
   margin: 12px auto;
-  height: 6px;
-  border-radius: 3px;
+  height: 12px;
+  border-radius: 6px;
   background: #bdc3c7;
   outline: none;
   -webkit-appearance: none;
+  cursor: pointer;
 }
 #time-slider::-webkit-slider-thumb {
   -webkit-appearance: none; appearance: none;
-  width: 20px; height: 20px; border-radius: 50%;
+  width: 26px; height: 26px; border-radius: 50%;
   background: #3498db; cursor: pointer;
 }
 #time-slider::-moz-range-thumb {
-  width: 20px; height: 20px; border-radius: 50%;
+  width: 26px; height: 26px; border-radius: 50%;
   background: #3498db; cursor: pointer; border: none;
 }
 
@@ -269,6 +270,29 @@ h1.title { display: none; }
 }
 .cadi-footer a { color: rgba(255,255,255,0.8); }
 
+/* Mobile overrides for map explorer */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px !important;
+  }
+  .map-description {
+    font-size: 15px !important;
+  }
+  .scenario-btn {
+    font-size: 14px !important;
+    width: 200px !important;
+    padding: 8px 12px !important;
+  }
+  .toggle-btn {
+    font-size: 13px !important;
+    width: 170px !important;
+    padding: 6px 10px !important;
+  }
+  #slider-label, .period-label {
+    font-size: 15px !important;
+  }
+}
+
 /* Override rmarkdown defaults */
 .main-container { max-width: 100%; padding: 0; margin: 0; }
 .container-fluid { padding: 0; }
@@ -286,6 +310,7 @@ tags$nav(class = "cadi-navbar",
     ),
     tags$ul(class = "nav-links",
       tags$li(tags$a(href = "index.html", "Home")),
+      tags$li(tags$a(href = "index.html#key-findings", "Key Findings")),
       tags$li(tags$a(href = "ssp585_absolute.html", class = "active", "Map Explorer")),
       tags$li(tags$a(href = "concepts.html", "Concepts")),
       tags$li(tags$a(href = "about.html", "Methods")),
@@ -376,7 +401,7 @@ tags$div(class = "map-explorer-container", style = "padding-top: 0;",
           "Change from 2001\u20132020 to ",
           tags$span(id = "period-text", "2041\u20132060")
         ),
-        tags$input(type = "range", min = "1", max = "4", value = "2", id = "time-slider")
+        tags$input(type = "range", min = "1", max = "4", value = "2", step = "1", id = "time-slider")
       )
     } else {
       tags$div(class = "period-label",
