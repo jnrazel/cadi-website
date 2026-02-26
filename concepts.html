@@ -99,52 +99,6 @@
 
 </div><!-- end cadi-section -->
 
-<!-- ===== Separator ===== -->
-<hr style="max-width:900px; margin: 0 auto;">
-
-<!-- ===== Technical Reference ===== -->
-<div class="cadi-section">
-
-  <div class="section-heading">
-    <h2>Technical Reference</h2>
-  </div>
-
-  <p><em>The sections below provide additional technical detail on the terms used in the maps and indicators.</em></p>
-
-  <h3>People Fed Yearly (PFY)</h3>
-  <p><strong>People Fed Yearly (PFY)</strong> translates annual caloric production potential into an approximate number of "people-fed equivalents" per year:</p>
-  <p>$$\text{PFY}=\frac{C_{\text{year}}}{c_{\min}\cdot 365},$$</p>
-  <p>where \(C_{\text{year}}\) is total kilocalories that can be produced per year in a grid cell and \(c_{\min}\) is a reference daily calorie requirement (kcal/person/day).</p>
-  <p>In practice we use \(c_{\min}=2000\) <strong>kcal/person/day</strong>, a widely used adult <strong>reference intake</strong> in nutrition labelling (EU: 8,400 kJ / 2,000 kcal; US FDA: 2,000 calories/day as general guidance).</p>
-  <p>PFY is an energy-only normalisation: it does not account for diet composition, food waste, access, or trade.</p>
-
-  <h3>Caloric Yield</h3>
-  <p><strong>Caloric yield</strong> expresses crop attainable yields in a common unit of dietary energy, typically <strong>kilocalories per hectare per year (kcal/ha/year)</strong>. It converts crop-specific attainable yields (e.g., tonnes/ha) into kilocalories using crop energy content tables, which allows comparison across crops and regions.</p>
-  <p>In this project, caloric yield is computed from <strong>GAEZ attainable yields</strong> under a given climate and management scenario, converted to kilocalories, and (when needed) aggregated across crops using the observed crop mix within each grid cell.</p>
-
-  <h3>Yield Variables in GAEZ</h3>
-  <p>GAEZ distinguishes different yield levels:</p>
-  <ul>
-    <li><strong>Potential yield (agro-climatic potential yield):</strong> modelled yield driven by climate and crop eco-physiology, reflecting agro-climatic constraints (without applying site-specific soil and terrain limitations).</li>
-    <li><strong>Attainable yield:</strong> potential yield further adjusted for <strong>soil and terrain</strong> constraints through yield-reduction factors, providing a more realistic upper bound under the assumed input/management level.</li>
-    <li><strong>Actual yield and production:</strong> spatially represented yields/production based on <strong>downscaled agricultural statistics</strong>, reflecting observed production patterns.</li>
-  </ul>
-
-  <h3>Shared Socioeconomic Pathways (SSPs)</h3>
-  <p>The <strong>Shared Socioeconomic Pathways (SSPs)</strong> are five socioeconomic storylines (SSP1–SSP5) describing plausible global development trajectories and spanning different challenges to <strong>mitigation</strong> and <strong>adaptation</strong>.</p>
-  <p>In CMIP6 and the IPCC Sixth Assessment Report, scenario labels such as <strong>SSP1-2.6</strong>, <strong>SSP3-7.0</strong>, and <strong>SSP5-8.5</strong> combine an SSP storyline with a forcing pathway targeting an approximate <strong>radiative forcing level in 2100</strong> (2.6, 7.0, or 8.5 W/m²).</p>
-
-  <h4>SSP1-2.6</h4>
-  <p><strong>SSP1-2.6</strong> combines the "Sustainability" storyline with a low forcing pathway (≈2.6 W/m² in 2100). Assessed end-of-century warming: <strong>1.8°C</strong> (very likely 1.3–2.4°C).</p>
-
-  <h4>SSP3-7.0</h4>
-  <p><strong>SSP3-7.0</strong> combines the "Regional Rivalry" storyline with a high forcing pathway (≈7.0 W/m² in 2100). Assessed end-of-century warming: <strong>3.6°C</strong> (very likely 2.8–4.6°C).</p>
-
-  <h4>SSP5-8.5</h4>
-  <p><strong>SSP5-8.5</strong> combines the "Fossil-fueled Development" storyline with a very high forcing pathway (≈8.5 W/m² in 2100). Assessed end-of-century warming: <strong>4.4°C</strong> (very likely 3.3–5.7°C).</p>
-
-</div>
-
 <!-- ===== Footer ===== -->
 <footer class="cadi-footer">
   <p>&copy; 2026 CADI Project. Climate-Driven Agricultural Decline Index.</p>

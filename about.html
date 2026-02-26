@@ -34,7 +34,7 @@
     <h2>Methods</h2>
   </div>
 
-  <p>We quantify <strong>climate-driven changes in agricultural production potential</strong> on a global 10×10 km grid. For each grid cell, we take the <strong>cropping patterns observed at 2020</strong>—which crops were grown and how much area each occupied—and hold them fixed across all time periods and scenarios. We then calculate how the <strong>attainable yield</strong> of these same crops changes under different climate conditions: a historical baseline (1981–2000), the recent observed climate (2001–2020, from AgERA5 reanalysis), and future climate projections under the SSP5-8.5 scenario (from CMIP6 climate model ensembles). By keeping the crop mix constant while only climate conditions vary, we isolate the direct impact of climate change on agricultural productivity.</p>
+  <p>We quantify <strong>climate-driven changes in agricultural production potential</strong> on a global grid at 5 arc-minute resolution (approximately 10×10 km at the equator). For each grid cell, we take the <strong>cropping pattern observed at approximately 2020</strong>—which crops are grown and how much area each occupies—and hold it fixed across all time periods and scenarios. We then calculate how the <strong>attainable yield</strong> of these crops changes under different climate conditions. By keeping the crop mix constant while only climate varies, we isolate the direct impact of climate change on agricultural productivity.</p>
 
   <h3>Conceptual Framework</h3>
 
@@ -43,56 +43,55 @@
   <p>Our approach isolates the climate component by holding the other two factors constant:</p>
 
   <ul>
-    <li><strong>Fixed cropping pattern</strong>: We use the actual distribution of crops and harvested areas observed at 2020 as our reference. This same crop mix is applied to all time periods and scenarios—both historical baselines and future projections.</li>
-    <li><strong>Fixed management assumption</strong>: We use GAEZ attainable yield estimates, which reflect a consistent management level (input intensity and water regime) across all scenarios.</li>
+    <li><strong>Fixed cropping pattern</strong>: The distribution of crops and harvested areas is held constant across all time periods and scenarios—both historical baselines and future projections. This is the "no-adaptation" assumption: farmers are assumed not to switch crops, expand into new areas, or adopt new technologies in response to changing climate.</li>
+    <li><strong>Fixed management assumption</strong>: We use GAEZ attainable yield estimates at a consistent management level (high-input, with limited mechanisation) across all scenarios. For each grid cell, irrigated and rainfed production are combined using the observed harvested area shares.</li>
   </ul>
 
-  <p>With this design, any differences in production across time periods or scenarios reflect pure <strong>climate-driven changes in yield potential</strong>—not adaptation through crop switching, irrigation expansion, or technological change.</p>
-
-  <p>Think of this as answering: <em>"What would happen to agricultural productivity if farmers kept growing exactly the same crops in the same proportions as observed at 2020, but faced the climate conditions of 2030, 2050, or 2080?"</em></p>
-
-  <p>This "no-adaptation" scenario establishes a baseline for measuring the adaptation challenge communities face.</p>
+  <p>With this design, any differences in production across time periods or scenarios reflect pure <strong>climate-driven changes in yield potential</strong>—not adaptation through crop switching, irrigation expansion, or technological change. This establishes a baseline against which the scale of the adaptation challenge can be measured.</p>
 
   <h3>Data Sources</h3>
 
-  <p><strong>Attainable yields</strong>: We use GAEZ v5 gridded <strong>attainable yield</strong> estimates under historical and future climate scenarios. Attainable yield represents the <strong>maximum productivity achievable given the climate and soil conditions</strong> of each grid cell, assuming a specified management level. It accounts for climate factors (temperature, precipitation, solar radiation, growing season), soil characteristics (nutrients, texture, depth, drainage), terrain constraints (slope, elevation), and crop physiology and growth requirements.</p>
+  <p><strong>Attainable yields</strong>: We use <a href="https://gaez.fao.org" target="_blank">GAEZ v5</a> gridded <strong>attainable yield</strong> estimates (Theme 5), produced jointly by FAO and IIASA. Attainable yield represents the maximum productivity achievable given the climate and soil conditions of each grid cell, assuming a specified management level. It accounts for climate factors (temperature, precipitation, solar radiation, growing season), soil characteristics (nutrients, texture, depth, drainage), terrain constraints (slope, elevation), and crop physiology and growth requirements. Attainable yield is adjusted downward from theoretical "potential yield" (Theme 2) to reflect realistic site-specific soil and terrain limitations.</p>
 
-  <p>Attainable yield is adjusted downward from theoretical "potential yield" to reflect realistic site-specific limitations, making it a more credible benchmark than pure agro-climatic potential.</p>
+  <p><strong>Cropping patterns</strong>: Harvested area data comes from GAEZ v5 Theme 6, which provides the spatial distribution of crops and harvested areas based on downscaled agricultural statistics reflecting observed cropping patterns at approximately year 2020. These cropping patterns are held constant across all time periods and climate scenarios, so that any differences in production potential reflect only the effect of changing climate.</p>
 
-  <p><strong>Cropping patterns</strong>: We use the <strong>observed distribution of crops and harvested areas at 2020</strong> as our fixed reference. This captures which crops were actually grown in each location and how much area each crop occupied. These cropping patterns are held constant across all time periods and climate scenarios, so that any differences in production potential reflect only the effect of changing climate.</p>
+  <p><strong>Climate data</strong>: For historical periods, the climate forcing comes from the <strong>AgERA5</strong> reanalysis dataset, which provides observed (reconstructed) climate. For future periods, we use CMIP6 climate model <strong>ensemble</strong> projections (multi-model mean) under the SSP5-8.5 scenario. GAEZ v5 provides yield estimates for the following time periods:</p>
 
-  <p>All spatial layers are harmonised to a common 10×10 km grid resolution and standardised crop definitions before calculation.</p>
+  <ul>
+    <li><strong>Historical:</strong> 1981–2000 and 2001–2020 (driven by AgERA5)</li>
+    <li><strong>Projected:</strong> 2021–2040, 2041–2060, 2061–2080, and 2081–2100 (driven by CMIP6 ensembles)</li>
+  </ul>
 
-  <h3>Cell-Level Production Calculation</h3>
+  <p>All spatial layers are harmonised to a common 5 arc-minute grid (4320 × 2160 cells globally) with standardised crop definitions before calculation.</p>
 
-  <p>Let \(A_{i,c}\) denote the harvested area (ha) of crop \(c\) in cell \(i\), taken from the baseline year and held fixed. Let \(Y_{i,c}(s,t)\) denote the GAEZ yield estimate (e.g., tonnes/ha) for scenario \(s\) and time period \(t\) under the chosen management setting.</p>
+  <h3>Cell-Level Caloric Production</h3>
 
-  <p>We compute total (mass) output in cell \(i\) as:</p>
+  <p>Let \(A_{i,c}\) denote the harvested area (ha) of crop \(c\) in cell \(i\), held fixed across all periods. Let \(y_{i,c}(s,t)\) denote the GAEZ attainable yield (tonnes/ha) for crop \(c\) in cell \(i\) under climate scenario \(s\) and time period \(t\). Let \(\kappa_c\) denote the caloric content of crop \(c\) (kcal per tonne).</p>
 
-  <p>$$\Theta_i(s,t) = \sum_{c} A_{i,c} \, Y_{i,c}(s,t).$$</p>
+  <p>Total caloric production in cell \(i\) is:</p>
 
-  <h3>Caloric Output and People Fed Yearly (PFY)</h3>
+  <p>$$C_i(s,t) = \sum_{c \in \mathcal{C}} A_{i,c} \cdot y_{i,c}(s,t) \cdot \kappa_c$$</p>
 
-  <p>To aggregate across crops in a common unit, we convert crop output into calories using a crop-specific calorie conversion factor \(\kappa_c\) (kcal per tonne):</p>
+  <p>where \(\mathcal{C}\) is the set of food crops. Cash crops (cocoa, coffee, tea, cotton, tobacco, rubber) and residual categories (fodder, crops n.e.s.) are assigned zero caloric value and do not contribute to this measure. Caloric conversion factors are derived from the USDA National Nutrient Database.</p>
 
-  <p>$$C_i(s,t) = \sum_{c} A_{i,c} \, Y_{i,c}(s,t) \, \kappa_c.$$</p>
+  <h3>People Fed Yearly (PFY)</h3>
 
-  <p>We then convert annual calories to <strong>People Fed Yearly (PFY)</strong> using a reference daily requirement \(c_{\min}\) (kcal/person/day):</p>
+  <p>We convert annual caloric production to <strong>People Fed Yearly (PFY)</strong> using a reference daily requirement \(c_{\min}\) (kcal/person/day):</p>
 
-  <p>$$\text{PFY}_i(s,t) = \frac{C_i(s,t)}{c_{\min} \cdot 365}.$$</p>
+  <p>$$\text{PFY}_i(s,t) = \frac{C_i(s,t)}{c_{\min} \cdot 365}$$</p>
 
-  <p>In practice we use \(c_{\min}=2000\) kcal/person/day as a standard reference value.</p>
+  <p>In practice we use \(c_{\min}=2000\) kcal/person/day as a standard reference value. PFY provides an intuitive measure: it tells us how many people the agricultural output of a cell could feed for a year.</p>
 
   <h3>Change Metrics</h3>
 
-  <p>Let \((s_0,t_0)\) denote the baseline scenario and baseline period. We report:</p>
+  <p>Let \((s_0,t_0)\) denote the baseline scenario and time period. We report two complementary metrics:</p>
 
   <ul>
-    <li><strong>Absolute change:</strong> \(\Delta \Theta_i(s,t) = \Theta_i(s,t) - \Theta_i(s_0,t_0)\)</li>
-    <li><strong>Percentage change:</strong> \(\Delta \Theta_i(s,t) \;/\; \Theta_i(s_0,t_0)\)</li>
+    <li><strong>Absolute change:</strong> \(\Delta C_i(s,t) = C_i(s,t) - C_i(s_0,t_0)\), expressed in People Fed Yearly. This highlights where the largest total losses occur.</li>
+    <li><strong>Percentage change:</strong> \(\Delta C_i(s,t) \;/\; C_i(s_0,t_0)\). This highlights where losses are most severe relative to existing production.</li>
   </ul>
 
-  <p>(and analogously for \(C_i\) and \(\text{PFY}_i\)).</p>
+  <p>On the website, <strong>observed changes</strong> compare the 2001–2020 period to the 1981–2000 baseline. <strong>Projected changes</strong> compare future periods (2021–2040 through 2081–2100) to the 2001–2020 baseline. See <a href="concepts.html#why-ssp585">Why We Use High-Emissions Climate Projections</a> for the rationale behind the choice of SSP5-8.5.</p>
 
 </div>
 

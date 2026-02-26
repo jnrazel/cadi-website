@@ -506,9 +506,15 @@ li {
 /* ---------- Team Page ---------- */
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 30px;
   margin: 30px 0;
+}
+
+@media (max-width: 768px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .team-card {
@@ -527,11 +533,13 @@ li {
 
 .team-card h4 {
   margin-bottom: 4px;
+  text-align: center;
 }
 
 .team-card .role {
   color: #777;
   font-size: 0.95rem;
+  text-align: center;
 }
 
 /* ---------- Partners Page ---------- */
