@@ -313,7 +313,7 @@ tags$nav(class = "cadi-navbar",
       tags$li(tags$a(href = "index.html#key-findings", "Key Findings")),
       tags$li(tags$a(href = "ssp585_absolute.html", class = "active", "Map Explorer")),
       tags$li(tags$a(href = "concepts.html", "Concepts")),
-      tags$li(tags$a(href = "about.html", "Methods")),
+      tags$li(tags$a(href = "results.html", "Results")),
       tags$li(tags$a(href = "team.html", "Team")),
       tags$li(tags$a(href = "partners.html", "Partners"))
     )
@@ -348,10 +348,11 @@ if (IS_OBSERVED) {
     '<span class="ssp-tooltip">IPCC climate projections (SSP5-8.5)',
     '<span class="ssp-tooltip-text">SSP5-8.5 is a high-emissions pathway from the IPCC Sixth Assessment Report, assuming continued fossil fuel reliance. ',
     'We use this scenario because it is the only one whose projections are consistent with the magnitude of agricultural changes already observed since 1981\u20132000.</span></span>. ',
-    'Use the slider to explore different time horizons. Values represent the ',
-    if(IS_ABSOLUTE) 'change in the number of people that can be fed per grid cell, relative to the 2001\u20132020 baseline.'
-    else 'percentage change in the number of people that can be fed per grid cell, relative to the 2001\u20132020 baseline.',
-    '<br><a href="concepts.html#climate-scenarios" style="color: #3498db;">Learn more about IPCC climate scenarios \u2192</a>'
+    'Use the slider to explore different time horizons. ',
+    'Values indicate the ', change_type_label, ' in the <strong>maximum annual number of people who could be fed</strong> ',
+    'in each grid cell, relative to the <strong>2001\u20132020</strong> baseline, holding the <strong>crop mix fixed</strong>.',
+    '<br><a href="concepts.html#climate-scenarios" style="color: #3498db;">Learn more about IPCC climate scenarios \u2192</a>',
+    ' | <a href="concepts.html" style="color: #3498db;">See our definitions \u2192</a>'
   )
 }
 

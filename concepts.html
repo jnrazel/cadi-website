@@ -21,7 +21,7 @@
       <li><a href="index.html#key-findings">Key Findings</a></li>
       <li><a href="ssp585_absolute.html">Map Explorer</a></li>
       <li><a href="concepts.html" class="active">Concepts</a></li>
-      <li><a href="about.html">Methods</a></li>
+      <li><a href="results.html">Results</a></li>
       <li><a href="team.html">Team</a></li>
       <li><a href="partners.html">Partners</a></li>
     </ul>
@@ -34,19 +34,54 @@
     <h2>Key Concepts</h2>
   </div>
 
-  <p>This page explains the main terms and ideas behind the CADI maps. For a full technical description of our methodology, see the <a href="about.html">Methods</a> page.</p>
+  <p>This page explains the main terms and ideas behind the CADI maps.</p>
+
+  <!-- ===== Table of Contents ===== -->
+  <div style="background: #f8f9fa; border-radius: 8px; padding: 18px 28px; margin-bottom: 30px;">
+    <strong>Contents</strong>
+    <ol style="margin-bottom: 0;">
+      <li><a href="#attainable-yield">Attainable Yield</a></li>
+      <li><a href="#crop-mix">Crop Mix</a></li>
+      <li><a href="#caloric-yield">Caloric Production Equivalent</a></li>
+      <li><a href="#pfy">People Fed Yearly (PFY)</a></li>
+      <li><a href="#maps">What the Maps Show</a></li>
+      <li><a href="#climate-scenarios">Climate Scenarios: IPCC SSPs</a></li>
+      <li><a href="#why-ssp585">Why We Use High-Emissions Climate Projections</a></li>
+    </ol>
+  </div>
 
   <!-- ===== Attainable Yield ===== -->
   <h3 id="attainable-yield">Attainable Yield</h3>
-  <p>Attainable yield is the realistic upper limit of what a crop can produce in a given location, considering climate, soil, and terrain. It comes from the <a href="https://gaez.fao.org" target="_blank">FAO/IIASA Global Agro-Ecological Zones (GAEZ)</a> model and is the key building block for our maps.</p>
-  <p>Attainable yield accounts for: temperature and rainfall patterns, solar radiation and growing season length, soil quality (nutrients, texture, depth, drainage), and terrain constraints (slope, elevation).</p>
-  <p><strong>What attainable yield is not:</strong> It is <em>not</em> an observation of what farmers actually harvest. It does not capture market conditions, farmer decisions, conflict, policy, or any socioeconomic factor. It represents what <em>could</em> be grown under a given climate and soil, assuming a consistent level of farm management. This makes it ideal for isolating the climate signal—but it should not be confused with actual production data.</p>
+  <p>Attainable yield is the biophysically attainable crop yield at a location, given climate, soil, and terrain constraints and a specified level of inputs and management, as modelled by the <a href="https://gaez.fao.org" target="_blank">FAO/IIASA Global Agro-Ecological Zones (GAEZ)</a> framework.</p>
+  <p>Attainable yield reflects:</p>
+  <ul>
+    <li>temperature and rainfall conditions</li>
+    <li>solar radiation and growing-season length</li>
+    <li>soil properties (nutrients, texture, depth, drainage)</li>
+    <li>terrain constraints (slope, elevation)</li>
+  </ul>
+  <p><strong>What attainable yield is not:</strong> It is <em>not</em> an observation of what farmers actually harvest. It does not incorporate market access, input use decisions, policy, conflict, or other socioeconomic factors. It is designed to isolate the role of biophysical constraints and climate conditions and should not be interpreted as observed production data.</p>
+
+  <br>
+
+  <!-- ===== Crop Mix ===== -->
+  <h3 id="crop-mix">Crop Mix</h3>
+  <p>For each grid cell, we consider the crops that are grown during the reference period (approximately year 2020) and hold this crop mix fixed across all time periods and scenarios. This means the same set of crops and harvested area shares is used whether we are computing production under the 1981–2000 climate or the 2081–2100 climate. Any differences in output therefore reflect only the effect of changing climate on the yields of the crops currently grown—not adaptation through crop switching or land-use change.</p>
+  <p>The crop data comes from GAEZ v5 Theme 6, which provides the spatial distribution of crops and harvested areas based on downscaled agricultural statistics. The crops we consider are:</p>
+  <ul>
+    <li><strong>Cereals:</strong> Wheat, Rice, Maize, Sorghum, Millet, Barley, Other cereals (oats, rye, buckwheat, etc.)</li>
+    <li><strong>Roots and tubers:</strong> White potato and Sweet potato, Cassava, Yams and other root crops</li>
+    <li><strong>Sugar crops:</strong> Sugar beet, Sugarcane</li>
+    <li><strong>Pulses and oilseeds:</strong> Pulses, Soybean, Rapeseed, Sunflower seed, Groundnuts, Sesame seed, Oil palm fruit, Olives and other oil crops, Coconut</li>
+    <li><strong>Other food crops:</strong> Banana and Plantain, Other vegetables, Tomato</li>
+  </ul>
+  <p><strong>Cash crops</strong> (cocoa, coffee, tea, cotton, tobacco, rubber) and residual categories (fodder, crops n.e.s.) are excluded and assigned zero caloric value, as our indexes focus on food production for human consumption. Fruits and nuts are also excluded due to the excessively wide range of caloric values within this group.</p>
 
   <br>
 
   <!-- ===== Caloric Production Equivalent ===== -->
   <h3 id="caloric-yield">Caloric Production Equivalent</h3>
-  <p>Different crops produce different amounts of food energy per hectare. To compare productivity across crops and regions, we convert crop-specific attainable yields (e.g., tonnes of wheat per hectare) into a common unit: <strong>kilocalories per hectare per year</strong> (kcal/ha/year). This caloric yield allows us to aggregate the output from multiple crops within a single grid cell into a single measure of caloric production potential.</p>
+  <p>To aggregate the different crops that grow in a given cell into a single, intuitive measure, we convert crop-specific attainable yields (e.g., tonnes per hectare) into food-energy equivalents measured in <strong>kilocalories per hectare per year</strong> (kcal/ha/year). This caloric yield allows us to aggregate the output from multiple crops within a single grid cell into a single measure of caloric production potential.</p>
 
   <br>
 
