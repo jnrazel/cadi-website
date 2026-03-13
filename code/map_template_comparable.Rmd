@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "CADI – Map Explorer"
 output:
   html_document:
     theme: null
@@ -14,6 +14,7 @@ library(leaflet)
 # Determine if this is observed or projected
 IS_OBSERVED <- (CURRENT_SCENARIO == "observed")
 IS_ABSOLUTE <- (CURRENT_TYPE == "absolute")
+
 ```
 
 ```{css, echo=FALSE}
@@ -323,25 +324,45 @@ tags$nav(class = "cadi-navbar",
 
 ```{r, echo=FALSE}
 # ===== Description text =====
+# Common intro and grid cell note (shared across all pages)
+intro_text <- paste0(
+  'Explore how agricultural productivity has changed\u2014and will continue to change\u2014due to climate change. ',
+  'Use the controls below to switch between observed (historical) and projected (future) changes, ',
+  'and to toggle between absolute and percentage metrics.'
+)
+
+grid_cell_note <- paste0(
+  'Grid cells are 5 arc-minutes (approximately 9.3\u00d79.3\u2009km at the equator).'
+)
+
+change_type_label <- if(IS_ABSOLUTE) "change" else "percentage change"
+
+# Values sentence (shared structure for both observed and projected)
+values_text <- paste0(
+  'Values indicate the ', change_type_label, ' in the <strong>maximum annual number of people who could be fed</strong> ',
+  'in each grid cell, ',
+  if (IS_OBSERVED) {
+    'relative to the <strong>1981\u20132000</strong> baseline, '
+  } else {
+    'relative to the <strong>2001\u20132020</strong> baseline, '
+  },
+  'holding the <strong>crop mix fixed</strong>. ',
+  grid_cell_note
+)
+
 if (IS_OBSERVED) {
-  change_type_label <- if(IS_ABSOLUTE) "change" else "percentage change"
   desc_html <- paste0(
-    'Explore how agricultural productivity has changed\u2014and will continue to change\u2014due to climate change. ',
-    'Use the controls below to switch between observed (historical) and projected (future) changes, ',
-    'and to toggle between absolute and percentage metrics.',
+    intro_text,
     '<br><br>',
     '<strong>Currently viewing:</strong> Observed ', change_type_label,
-    ' in agricultural productivity due to climate change from the 1981\u20132000 baseline to the 2001\u20132020 period, ',
-    'based on historical climate data (AgERA5). Values represent the ',
-    if(IS_ABSOLUTE) 'change in the number of people that can be fed per grid cell (based on 2,000 calories per person per day).'
-    else 'percentage change in the number of people that can be fed per grid cell.'
+    ' in agricultural productivity, comparing the <strong>2001\u20132020</strong> climate to the <strong>1981\u20132000</strong> baseline, ',
+    'based on historical climate data (AgERA5). ',
+    values_text,
+    '<br><a href="concepts.html" style="color: #3498db;">See our definitions \u2192</a>'
   )
 } else {
-  change_type_label <- if(IS_ABSOLUTE) "change" else "percentage change"
   desc_html <- paste0(
-    'Explore how agricultural productivity has changed\u2014and will continue to change\u2014due to climate change. ',
-    'Use the controls below to switch between observed (historical) and projected (future) changes, ',
-    'and to toggle between absolute and percentage metrics.',
+    intro_text,
     '<br><br>',
     '<strong>Currently viewing:</strong> Projected ', change_type_label,
     ' in agricultural productivity under ',
@@ -349,8 +370,7 @@ if (IS_OBSERVED) {
     '<span class="ssp-tooltip-text">SSP5-8.5 is a high-emissions pathway from the IPCC Sixth Assessment Report, assuming continued fossil fuel reliance. ',
     'We use this scenario because it is the only one whose projections are consistent with the magnitude of agricultural changes already observed since 1981\u20132000.</span></span>. ',
     'Use the slider to explore different time horizons. ',
-    'Values indicate the ', change_type_label, ' in the <strong>maximum annual number of people who could be fed</strong> ',
-    'in each grid cell, relative to the <strong>2001\u20132020</strong> baseline, holding the <strong>crop mix fixed</strong>.',
+    values_text,
     '<br><a href="concepts.html#climate-scenarios" style="color: #3498db;">Learn more about IPCC climate scenarios \u2192</a>',
     ' | <a href="concepts.html" style="color: #3498db;">See our definitions \u2192</a>'
   )

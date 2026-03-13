@@ -5,6 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CADI – Results</title>
   <link rel="stylesheet" href="css/cadi-style.css">
+  <style>
+    .results-group { margin-bottom: 50px; }
+    .results-group h3 { color: #2c3e50; margin-bottom: 6px; }
+    .results-group > p { color: #555; font-size: 0.95em; margin-bottom: 20px; }
+    .result-figure { margin-bottom: 32px; }
+    .result-figure img {
+      width: 100%;
+      max-width: 880px;
+      display: block;
+      margin: 0 auto;
+      border-radius: 4px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+    }
+    .result-figure .fig-caption {
+      text-align: center;
+      font-size: 0.88em;
+      color: #777;
+      margin-top: 8px;
+    }
+  </style>
 </head>
 <body class="has-navbar">
 
@@ -33,7 +53,85 @@
     <h2>Results</h2>
   </div>
 
-  <p style="text-align:center; color:#666; margin-top: 40px; font-size: 1.2em;">Results and key findings will appear here.</p>
+  <p>Selected findings from the CADI analysis. All changes are measured in People Fed Yearly (PFY) — the number of people a grid cell's caloric output could feed for one year.</p>
+
+  <!-- ===== 1. Country Rankings ===== -->
+  <div class="results-group">
+    <h3>Country-Level Rankings</h3>
+    <p>Which countries experience the largest aggregate caloric changes — both net and loss-only (ignoring gains within each country).</p>
+
+    <div class="result-figure">
+      <img src="img/results/m1_country_calorie_change_observed.png" alt="Top/bottom countries by observed PFY change">
+      <div class="fig-caption">Observed net PFY change (2001–2020 vs 1981–2000): top 10 gainers and bottom 10 losers.</div>
+    </div>
+
+    <div class="result-figure">
+      <img src="img/results/m1_country_calorie_change_percapita.png" alt="Per-capita observed PFY change">
+      <div class="fig-caption">Same ranking normalized by population, revealing disproportionate impacts on smaller nations.</div>
+    </div>
+
+    <div class="result-figure">
+      <img src="img/results/m1_country_loss_only_abs_obs_observed.png" alt="Loss-only observed country ranking">
+      <div class="fig-caption">Loss-only ranking: aggregate PFY losses ignoring within-country gains. Large countries with mixed outcomes (e.g., India) rank higher here.</div>
+    </div>
+
+    <div class="result-figure">
+      <img src="img/results/m2_country_pfy_change_abs_4160_ssp585.png" alt="Projected country ranking 2041-2060">
+      <div class="fig-caption">Projected net PFY change by 2041–2060 (SSP5-8.5). Baseline: 2001–2020.</div>
+    </div>
+
+    <div class="result-figure">
+      <img src="img/results/m2_country_pfy_change_pc_4160_ssp585.png" alt="Projected per-capita country ranking 2041-2060">
+      <div class="fig-caption">Per-capita projected ranking for 2041–2060 (SSP5-8.5).</div>
+    </div>
+
+    <div class="result-figure">
+      <img src="img/results/m2_country_loss_only_abs_4160_ssp585.png" alt="Projected loss-only country ranking 2041-2060">
+      <div class="fig-caption">Projected loss-only ranking for 2041–2060 (SSP5-8.5).</div>
+    </div>
+  </div>
+
+  <!-- ===== 2. Cropland Affected ===== -->
+  <div class="results-group">
+    <h3>Cropland Affected</h3>
+    <p>Share of global harvested area experiencing caloric decline at different severity thresholds.</p>
+
+    <div class="result-figure">
+      <img src="img/results/m1_cropland_affected_bar.png" alt="Observed cropland affected">
+      <div class="fig-caption">Observed period: share of harvested area with caloric losses exceeding 5%, 10%, 15%, and 20%.</div>
+    </div>
+
+    <div class="result-figure">
+      <img src="img/results/m1_loss_irr_rfed_bar_share.png" alt="Irrigated vs rainfed loss intensity">
+      <div class="fig-caption">Breakdown by land type: rainfed cropland is more exposed to climate-driven losses than irrigated areas.</div>
+    </div>
+
+    <div class="result-figure">
+      <img src="img/results/m2_cropland_affected_by_period_ssp370_base0120.png" alt="Cropland affected by period SSP370">
+      <div class="fig-caption">Projected cropland affected across periods under SSP3-7.0. The share of area exceeding each threshold grows over time.</div>
+    </div>
+
+    <div class="result-figure">
+      <img src="img/results/m2_cropland_affected_by_period_ssp585_base0120.png" alt="Cropland affected by period SSP585">
+      <div class="fig-caption">Same analysis under SSP5-8.5 — higher-emission scenario shows steeper acceleration of losses.</div>
+    </div>
+  </div>
+
+  <!-- ===== 3. Latitude Analysis ===== -->
+  <div class="results-group">
+    <h3>Latitude Patterns</h3>
+    <p>How caloric changes vary by latitude — tropical regions bear the brunt of losses while higher latitudes see some gains.</p>
+
+    <div class="result-figure">
+      <img src="img/results/m2_latitude_observed_base0120.png" alt="Observed latitude profile">
+      <div class="fig-caption">Observed PFY changes by latitude band: losses concentrated in the tropics, modest gains at northern latitudes.</div>
+    </div>
+
+    <div class="result-figure">
+      <img src="img/results/m2_latitude_ssp585_4160_base0120.png" alt="Projected latitude profile 2041-2060 SSP585">
+      <div class="fig-caption">Projected latitude profile for 2041–2060 (SSP5-8.5): tropical losses intensify and spread poleward.</div>
+    </div>
+  </div>
 
 </div>
 
