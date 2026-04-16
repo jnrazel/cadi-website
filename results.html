@@ -5,6 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CADI – Results</title>
   <link rel="stylesheet" href="css/cadi-style.css">
+  <style>
+    .result-finding { margin-bottom: 50px; }
+    .result-finding .finding-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #c0392b;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .result-finding .finding-body {
+      font-size: 0.95em;
+      color: #444;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .result-figure { margin-bottom: 28px; }
+    .result-figure img {
+      width: 100%;
+      max-width: 820px;
+      display: block;
+      margin: 0 auto;
+      border-radius: 4px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+    }
+    .result-figure .fig-caption {
+      text-align: center;
+      font-size: 0.85em;
+      color: #777;
+      margin-top: 8px;
+    }
+  </style>
 </head>
 <body class="has-navbar">
 
@@ -18,7 +49,7 @@
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="index.html#key-findings">Key Findings</a></li>
-      <li><a href="ssp585_absolute.html">Map Explorer</a></li>
+      <li><a href="ssp370_absolute.html">Map Explorer</a></li>
       <li><a href="concepts.html">Concepts</a></li>
       <li><a href="results.html" class="active">Results</a></li>
       <li><a href="team.html">Team</a></li>
@@ -32,16 +63,95 @@
   <div class="cadi-hero-content">
     <div class="hero-title" style="font-size: 42px;">Results</div>
     <div class="hero-subtitle" style="font-size: 22px;">
-      Detailed results supporting the key findings
+      Figures supporting the key findings
     </div>
   </div>
 </section>
 
-<div class="cadi-section" style="font-size: 24px; line-height: 1.6;">
+<div class="cadi-section" style="font-size: 22px; line-height: 1.6;">
 
-  <p>A companion document with the full set of results is available <a href="#" style="color: #c0392b; font-weight: 600;">[link forthcoming]</a>.</p>
+  <p>The figures below provide the evidence behind each <a href="index.html#key-findings" style="color: #c0392b; font-weight: 600;">key finding</a>.</p>
 
-  <p>See also: <a href="index.html#key-findings" style="color: #c0392b; font-weight: 600;">Key Findings</a> &middot; <a href="ssp585_absolute.html" style="color: #c0392b; font-weight: 600;">Map Explorer</a></p>
+  <!-- ===== Finding 1 ===== -->
+  <div class="result-finding">
+    <div class="finding-title">1. Climate change is already eroding food production for hundreds of millions of people</div>
+    <div class="finding-body">More than 640 million people already live in agricultural areas where PFY is down by more than 10% compared with 30 years ago. Nearly 690 million live in places that now produce enough food for 5,000 fewer people per year than they once did.</div>
+
+    <div class="result-figure">
+      <img src="img/results/m1_pop_by_growth_rate_bar.png" alt="Population in cells with percentage PFY decline">
+      <div class="fig-caption">Population living in cells with observed percentage PFY decline exceeding each threshold (2001–2020 vs 1981–2000).</div>
+    </div>
+
+    <div class="result-figure">
+      <img src="img/results/m1_pop_by_pfy_dif_bar.png" alt="Population in cells with absolute PFY loss">
+      <div class="fig-caption">Population living in cells with observed absolute PFY loss exceeding each threshold (2001–2020 vs 1981–2000).</div>
+    </div>
+  </div>
+
+  <!-- ===== Finding 2 ===== -->
+  <div class="result-finding">
+    <div class="finding-title">2. The parts of global agriculture with the least built-in protection are already taking the biggest losses</div>
+    <div class="finding-body">About 16% of global cropland has already lost more than 10% of its productivity. But rainfed farming is more exposed: around 20% of rainfed cropland has lost at least 10%, and nearly 5% has lost more than 30%.</div>
+
+    <div class="result-figure">
+      <img src="img/results/m1_cropland_affected_bar.png" alt="Cropland affected by PFY decline">
+      <div class="fig-caption">Share of global agricultural land with observed PFY decline exceeding various thresholds.</div>
+    </div>
+
+    <div class="result-figure">
+      <img src="img/results/m1_loss_irr_rfed_bar_share.png" alt="Irrigated vs rainfed losses">
+      <div class="fig-caption">Share of irrigated and rainfed area with observed PFY decline exceeding various thresholds. Rainfed cropland is consistently more exposed.</div>
+    </div>
+  </div>
+
+  <!-- ===== Finding 3 ===== -->
+  <div class="result-finding">
+    <div class="finding-title">3. A small number of hotspots already account for a disproportionate share of the global damage</div>
+    <div class="finding-body">Today, just 5% of agricultural land accounts for 35% of all PFY losses.</div>
+
+    <div class="result-figure">
+      <img src="img/results/m2_hotspot_concentration_cells_base8100.png" alt="Hotspot concentration curve">
+      <div class="fig-caption">Hotspot concentration of PFY losses (SSP5-8.5). Cells ranked by loss intensity. Lines above the diagonal indicate that losses are concentrated in a small share of land. Baseline: 1981–2000.</div>
+    </div>
+  </div>
+
+  <!-- ===== Finding 4 ===== -->
+  <div class="result-finding">
+    <div class="finding-title">4. Losses are likely to accelerate: by mid-century, nearly half of the world could be living in declining agricultural zones</div>
+    <div class="finding-body">Today, around 15% of the global population lives in cells with at least a 5% decline in PFY. By 2041–2060, that rises to 49% under SSP3-7.0. Roughly 25% of countries account for 85–90% of total global losses by mid-century.</div>
+
+    <div class="result-figure">
+      <img src="img/results/m2_ssp_justification_pct_4160_base8100.png" alt="Population with PFY decline by mid-century">
+      <div class="fig-caption">Share of population in cells with percentage PFY decline exceeding each threshold, 2041–2060. All three SSP scenarios shown. Baseline: 1981–2000.</div>
+    </div>
+
+    <div class="result-figure">
+      <img src="img/results/m4_hotspot_concentration_countries_base8100.png" alt="Country concentration of losses">
+      <div class="fig-caption">Concentration of PFY losses across countries (SSP5-8.5). Countries ranked by their share of global losses. Baseline: 1981–2000.</div>
+    </div>
+  </div>
+
+  <!-- ===== Finding 5 ===== -->
+  <div class="result-finding">
+    <div class="finding-title">5. The geography of climate change is highly uneven</div>
+    <div class="finding-body">Climate change is reshaping agricultural productivity in very unequal ways across regions. Tropical regions bear the brunt of losses, while some high-latitude areas gain.</div>
+
+    <div class="result-figure">
+      <img src="img/results/m2_latitude_ssp585_4160_base0120.png" alt="Latitude gradient of PFY change">
+      <div class="fig-caption">PFY change by latitude (SSP5-8.5, 2041–2060). Mean and percentile lines over binned cells. Tropical regions between 20°S and 20°N bear the heaviest losses. Baseline: 2001–2020.</div>
+    </div>
+  </div>
+
+  <!-- ===== Finding 6 ===== -->
+  <div class="result-finding">
+    <div class="finding-title">6. Those least responsible are the least able to absorb the shock</div>
+    <div class="finding-body">The countries that contributed least to cumulative CO₂ are among the most vulnerable, and that relationship strengthens over time.</div>
+
+    <div class="result-figure">
+      <img src="img/results/m41_vulnerability_pc_cumemiss_vs_vuln_pc_proj_4160_ssp370_base0120.png" alt="Vulnerability vs cumulative emissions">
+      <div class="fig-caption">Per-capita vulnerability vs cumulative CO₂ emissions (projected 2041–2060, SSP3-7.0). Vulnerability = −PFY / GDP. Only countries with PFY losses shown. Baseline: 2001–2020.</div>
+    </div>
+  </div>
 
 </div>
 

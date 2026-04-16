@@ -14,6 +14,9 @@ library(leaflet)
 # Determine if this is observed or projected
 IS_OBSERVED <- (CURRENT_SCENARIO == "observed")
 IS_ABSOLUTE <- (CURRENT_TYPE == "absolute")
+IS_SSP370 <- (CURRENT_SCENARIO == "ssp370")
+IS_SSP585 <- (CURRENT_SCENARIO == "ssp585")
+SSP_LABEL <- if (IS_SSP370) "SSP3-7.0" else if (IS_SSP585) "SSP5-8.5" else ""
 
 ```
 
@@ -312,7 +315,7 @@ tags$nav(class = "cadi-navbar",
     tags$ul(class = "nav-links",
       tags$li(tags$a(href = "index.html", "Home")),
       tags$li(tags$a(href = "index.html#key-findings", "Key Findings")),
-      tags$li(tags$a(href = "ssp585_absolute.html", class = "active", "Map Explorer")),
+      tags$li(tags$a(href = "ssp370_absolute.html", class = "active", "Map Explorer")),
       tags$li(tags$a(href = "concepts.html", "Concepts")),
       tags$li(tags$a(href = "results.html", "Results")),
       tags$li(tags$a(href = "team.html", "Team")),
@@ -366,9 +369,11 @@ if (IS_OBSERVED) {
     '<br><br>',
     '<strong>Currently viewing:</strong> Projected ', change_type_label,
     ' in agricultural productivity under ',
-    '<span class="ssp-tooltip">IPCC climate projections (SSP5-8.5)',
-    '<span class="ssp-tooltip-text">SSP5-8.5 is a high-emissions pathway from the IPCC Sixth Assessment Report, assuming continued fossil fuel reliance. ',
-    'We use this scenario because it is the only one whose projections are consistent with the magnitude of agricultural changes already observed since 1981\u20132000.</span></span>. ',
+    '<span class="ssp-tooltip">IPCC climate projections (', SSP_LABEL, ')',
+    '<span class="ssp-tooltip-text">', SSP_LABEL, ' is ',
+    if (IS_SSP370) 'a high-emissions pathway (3.6\u00b0C end-of-century warming)' else 'a very high-emissions pathway (4.4\u00b0C end-of-century warming)',
+    ' from the IPCC Sixth Assessment Report. ',
+    'We report results under both SSP3-7.0 and SSP5-8.5; observed agricultural deterioration tracks between these two scenarios.</span></span>. ',
     'Use the slider to explore different time horizons. ',
     values_text,
     '<br><a href="concepts.html#climate-scenarios" style="color: #3498db;">Learn more about IPCC climate scenarios \u2192</a>',
@@ -387,7 +392,7 @@ tags$div(class = "map-explorer-container",
 tags$div(class = "map-explorer-container", style = "padding-top: 0;",
   tags$div(class = "controls-container",
     
-    # Primary toggle: Observed on left, Projected on right (default selection stays on Projected)
+    # Primary toggle: Observed | SSP3-7.0 | SSP5-8.5
     tags$div(class = "scenario-selector",
       tags$a(
         class = paste0("scenario-btn", if(IS_OBSERVED) " active" else ""),
@@ -395,13 +400,18 @@ tags$div(class = "map-explorer-container", style = "padding-top: 0;",
         paste0("Observed (2001", "\u2013", "2020)")
       ),
       tags$a(
-        class = paste0("scenario-btn", if(!IS_OBSERVED) " active" else ""),
-        href = if(IS_OBSERVED) paste0("ssp585_", CURRENT_TYPE, ".html") else "javascript:void(0)",
-        paste0("Projected (2021", "\u2013", "2100)")
+        class = paste0("scenario-btn", if(IS_SSP370) " active" else ""),
+        href = if(!IS_SSP370) paste0("ssp370_", CURRENT_TYPE, ".html") else "javascript:void(0)",
+        paste0("Projected SSP3-7.0")
+      ),
+      tags$a(
+        class = paste0("scenario-btn", if(IS_SSP585) " active" else ""),
+        href = if(!IS_SSP585) paste0("ssp585_", CURRENT_TYPE, ".html") else "javascript:void(0)",
+        paste0("Projected SSP5-8.5")
       )
     ),
     
-    # Secondary toggle
+    # Secondary toggle (absolute vs percentage)
     tags$div(class = "toggle-container",
       tags$a(
         class = paste0("toggle-btn", if(IS_ABSOLUTE) " active" else ""),
@@ -452,10 +462,10 @@ if (IS_OBSERVED) {
 } else {
   time_periods <- c("2021\u20132040", "2041\u20132060", "2061\u20132080", "2081\u20132100")
   
-  if (IS_ABSOLUTE) {
-    tifs <- absolute_tifs_585
+  if (IS_SSP370) {
+    tifs <- if (IS_ABSOLUTE) absolute_tifs_370 else relative_tifs_370
   } else {
-    tifs <- relative_tifs_585
+    tifs <- if (IS_ABSOLUTE) absolute_tifs_585 else relative_tifs_585
   }
   
   maps <- list()

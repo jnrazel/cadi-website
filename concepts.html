@@ -19,7 +19,7 @@
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="index.html#key-findings">Key Findings</a></li>
-      <li><a href="ssp585_absolute.html">Map Explorer</a></li>
+      <li><a href="ssp370_absolute.html">Map Explorer</a></li>
       <li><a href="concepts.html" class="active">Concepts</a></li>
       <li><a href="results.html">Results</a></li>
       <li><a href="team.html">Team</a></li>
@@ -34,7 +34,9 @@
     <h2>Key Concepts</h2>
   </div>
 
-  <p>This page explains the main terms and ideas behind the CADI maps. For a full technical description of our methodology, see our technical report (link forthcoming).</p>
+  <div style="background: #eef6fb; border: 1px solid #bee0f5; border-radius: 8px; padding: 18px 28px; margin-bottom: 30px;">
+    <p style="margin: 0;">This page explains the main terms and ideas behind the CADI maps. For a full technical description of our methodology, see our <a href="#" style="color: #c0392b; font-weight: 600;">Technical Report</a> [link forthcoming].</p>
+  </div>
 
   <!-- ===== Table of Contents ===== -->
   <div style="background: #f8f9fa; border-radius: 8px; padding: 18px 28px; margin-bottom: 30px;">
@@ -45,8 +47,9 @@
       <li><a href="#caloric-yield">Caloric Production Equivalent</a></li>
       <li><a href="#pfy">People Fed Yearly (PFY)</a></li>
       <li><a href="#maps">What the Maps Show</a></li>
+      <li><a href="#agera5">Climate Data: AgERA5 and the Delta Method</a></li>
       <li><a href="#climate-scenarios">Climate Scenarios: IPCC SSPs</a></li>
-      <li><a href="#why-ssp585">Why We Use High-Emissions Climate Projections</a></li>
+      <li><a href="#scenario-selection">Which Scenarios Do We Report?</a></li>
     </ol>
   </div>
 
@@ -107,11 +110,24 @@
   <h3 id="maps">What the Maps Show</h3>
   <p>Our maps display how much agricultural productivity changes—or is projected to change—in each 10&nbsp;km grid cell around the world. Two views are available:</p>
   <ul>
-    <li><strong>Observed (2001–2020):</strong> What has already happened. Compares attainable yields under the 2001–2020 climate to the 1981–2000 baseline, using observed climate data (AgERA5).</li>
-    <li><strong>Projected (2021–2100):</strong> What climate models project will happen. Compares future periods to the 2001–2020 baseline, under the IPCC SSP5-8.5 scenario. A slider lets you explore four time horizons: 2021–2040, 2041–2060, 2061–2080, and 2081–2100.</li>
+    <li><strong>Observed (2001–2020):</strong> What has already happened. Compares attainable yields under the 2001–2020 climate to the 1981–2000 baseline, using observed climate data (<a href="#agera5">AgERA5</a>).</li>
+    <li><strong>Projected (2021–2100):</strong> What climate models project will happen. Compares future periods to the 2001–2020 baseline, under two IPCC scenarios (<a href="#climate-scenarios">SSP3-7.0 and SSP5-8.5</a>). A slider lets you explore four time horizons: 2021–2040, 2041–2060, 2061–2080, and 2081–2100.</li>
   </ul>
   <p>In all cases, cropping patterns—which crops are grown and how much area each occupies—are held fixed at their observed year-2020 distribution. Only climate conditions vary across time periods, so any differences represent the pure climate-driven change in production potential.</p>
-  <p>The climate data sources (AgERA5 for historical periods and CMIP6 ensembles for future projections) are built into the GAEZ v5 modelling framework and are not a choice specific to this project.</p>
+  <p>The climate data sources (<a href="#agera5">AgERA5</a> for historical periods and CMIP6 ensembles for future projections) are built into the GAEZ v5 modelling framework and are not a choice specific to this project.</p>
+
+  <br>
+
+  <!-- ===== AgERA5 and the Delta Method ===== -->
+  <h3 id="agera5">Climate Data: AgERA5 and the Delta Method</h3>
+  <p><strong><a href="https://cds.climate.copernicus.eu/datasets/sis-agrometeorological-indicators" target="_blank">AgERA5</a></strong> is a global gridded climate dataset from the Copernicus Climate Change Service, tailored for agricultural and agro-ecological applications. It provides daily values for temperature (min/max), solar radiation, precipitation, vapour pressure, and wind speed at approximately 10&nbsp;km resolution, derived from the ERA5 reanalysis. GAEZ&nbsp;v5 uses AgERA5 as the climate input for both historical periods (1981–2000 and 2001–2020).</p>
+  <p>For future projections, GAEZ&nbsp;v5 uses the <strong>delta method</strong>. Rather than feeding raw climate model output directly into the yield calculations, the approach works as follows:</p>
+  <ol>
+    <li>Five CMIP6 global climate models simulate both a historical period (1981–2000) and future scenarios, bias-corrected through the ISIMIP3b framework.</li>
+    <li>For each climate variable, the <em>change</em> (delta) between the model's historical simulation and its future scenario is computed.</li>
+    <li>This delta is applied to the observed AgERA5 data from 1981–2000, producing a "future climate" that preserves the spatial detail and statistical properties of the observational record.</li>
+  </ol>
+  <p>This means that projected yields use only the <em>change signal</em> from the climate models, not their absolute values. However, the observed period 2001–2020 is computed differently: it is driven directly by AgERA5 observations rather than by a delta applied to the 1981–2000 baseline. The two periods are therefore not constructed in exactly the same way, which can lead to structural differences — in some regions, the sign of the change can flip between the observed and projected periods. This is a known feature of the GAEZ framework and should be kept in mind when comparing observed and projected maps.</p>
 
   <br>
 
@@ -128,7 +144,7 @@
   <br>
 
   <!-- ===== Scenario choice ===== -->
-  <h3 id="why-ssp585">Which Scenarios Do We Report?</h3>
+  <h3 id="scenario-selection">Which Scenarios Do We Report?</h3>
   <p>We report results under two scenarios: <strong>SSP3-7.0</strong> and <strong>SSP5-8.5</strong>. We present SSP3-7.0 as the primary scenario throughout the key findings, with SSP5-8.5 shown alongside for comparison.</p>
   <p>The two scenarios produce very similar outcomes through mid-century — for example, the number of countries experiencing net agricultural losses is identical at 2041–2060 (101 out of 166 countries under both). They diverge more sharply toward the end of the century, where SSP5-8.5 produces deeper losses.</p>
   <p>The GAEZ model generates its projections using the 1981–2000 period as a baseline. When we compare these projections to the changes actually observed during 2001–2020, the observed deterioration in agricultural productivity tracks between SSP3-7.0 and SSP5-8.5. Lower-emissions scenarios (e.g., SSP1-2.6) project changes that are smaller than what has already been observed, which would paradoxically suggest an <em>improvement</em> going forward — not because conditions are expected to get better, but because the damage already observed has outpaced those projections.</p>

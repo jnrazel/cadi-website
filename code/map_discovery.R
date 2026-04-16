@@ -16,7 +16,7 @@ library(ggthemes)
 # SECTION 1: Render map HTML pages
 # =============================================================================
 
-scenario_vec <- c("observed", "ssp585")
+scenario_vec <- c("observed", "ssp370", "ssp585")
 type_vec <- c("absolute", "relative")
 
 output_dir <- normalizePath("..")  # website root
