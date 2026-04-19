@@ -232,10 +232,27 @@ li {
 
 /* ---------- Mobile: scale down large fonts ---------- */
 @media (max-width: 768px) {
+  /* Justified text looks bad on narrow screens (huge inter-word gaps
+     on short lines). Switch to left-aligned on mobile. */
+  body {
+    text-align: left;
+  }
+
   /* Override inline font-size on home page cadi-section */
   .cadi-section {
     font-size: 17px !important;
     line-height: 1.65 !important;
+  }
+
+  /* Shorter hero on mobile so background-size:cover doesn't over-zoom
+     a landscape image on a portrait screen. A flatter hero aspect
+     ratio is closer to the source images (both map and latitude plot
+     are landscape), so less of the image gets cropped away. */
+  .cadi-hero {
+    min-height: 55vh;
+  }
+  .cadi-hero-content {
+    padding: 48px 24px 32px;
   }
 
   .cadi-hero-content .hero-abbrev {

@@ -35,7 +35,7 @@
   </div>
 
   <div style="background: #eef6fb; border: 1px solid #bee0f5; border-radius: 8px; padding: 18px 28px; margin-bottom: 30px;">
-    <p style="margin: 0;">This page explains the main terms and ideas behind the CADI maps. For a full technical description of our methodology, see our <a href="#" style="color: #c0392b; font-weight: 600;">Technical Report</a> [link forthcoming].</p>
+    <p style="margin: 0;">This page explains the main terms and ideas behind the CADI maps. For a full technical description of our methodology, see our <a href="CADI_technical_report.pdf" target="_blank" style="color: #c0392b; font-weight: 600;">Technical Report</a>.</p>
   </div>
 
   <!-- ===== Table of Contents ===== -->
@@ -47,7 +47,7 @@
       <li><a href="#caloric-yield">Caloric Production Equivalent</a></li>
       <li><a href="#pfy">People Fed Yearly (PFY)</a></li>
       <li><a href="#maps">What the Maps Show</a></li>
-      <li><a href="#agera5">Climate Data: AgERA5 and the Delta Method</a></li>
+      <li><a href="#agera5">Climate Data: AgERA5 and Future Projections</a></li>
       <li><a href="#climate-scenarios">Climate Scenarios: IPCC SSPs</a></li>
       <li><a href="#scenario-selection">Which Scenarios Do We Report?</a></li>
     </ol>
@@ -118,16 +118,25 @@
 
   <br>
 
-  <!-- ===== AgERA5 and the Delta Method ===== -->
-  <h3 id="agera5">Climate Data: AgERA5 and the Delta Method</h3>
-  <p><strong><a href="https://cds.climate.copernicus.eu/datasets/sis-agrometeorological-indicators" target="_blank">AgERA5</a></strong> is a global gridded climate dataset from the Copernicus Climate Change Service, tailored for agricultural and agro-ecological applications. It provides daily values for temperature (min/max), solar radiation, precipitation, vapour pressure, and wind speed at approximately 10&nbsp;km resolution, derived from the ERA5 reanalysis. GAEZ&nbsp;v5 uses AgERA5 as the climate input for both historical periods (1981–2000 and 2001–2020).</p>
-  <p>For future projections, GAEZ&nbsp;v5 uses the <strong>delta method</strong>. Rather than feeding raw climate model output directly into the yield calculations, the approach works as follows:</p>
+  <!-- ===== AgERA5 and Future Projections ===== -->
+  <h3 id="agera5">Climate Data: AgERA5 and Future Projections</h3>
+
+  <h4>The AgERA5 dataset</h4>
+  <p><strong><a href="https://cds.climate.copernicus.eu/datasets/sis-agrometeorological-indicators" target="_blank">AgERA5</a></strong> is a global gridded climate dataset produced by the Copernicus Climate Change Service for agricultural and agro-ecological applications. Based on the ERA5 reanalysis, it provides daily data at approximately 10&nbsp;km resolution for variables such as minimum and maximum temperature, precipitation, solar radiation, vapour pressure, and wind speed.</p>
+  <p>In GAEZ&nbsp;v5, AgERA5 is the climate input used to estimate crop yields for the historical periods 1981–2000 and 2001–2020.</p>
+
+  <h4>How future projections are constructed</h4>
+  <p>For future periods, GAEZ&nbsp;v5 uses the <strong>delta method</strong> rather than raw climate model output. The procedure has three steps:</p>
   <ol>
-    <li>Five CMIP6 global climate models simulate both a historical period (1981–2000) and future scenarios, bias-corrected through the ISIMIP3b framework.</li>
-    <li>For each climate variable, the <em>change</em> (delta) between the model's historical simulation and its future scenario is computed.</li>
-    <li>This delta is applied to the observed AgERA5 data from 1981–2000, producing a "future climate" that preserves the spatial detail and statistical properties of the observational record.</li>
+    <li><strong>Climate models simulate past and future conditions.</strong> Five CMIP6 global climate models simulate a historical baseline (1981–2000) and future climate scenarios, bias-corrected through the ISIMIP3b framework.</li>
+    <li><strong>The climate change signal is calculated.</strong> For each climate variable, the <em>monthly</em> difference between the future simulation and the model's own historical simulation is computed. This difference is the <em>delta</em>, or projected change.</li>
+    <li><strong>The delta is applied to observed climate data.</strong> The projected change is added to the observed AgERA5 baseline for 1981–2000, producing a future climate surface that retains the fine spatial detail of AgERA5 while incorporating the change signal from the climate models.</li>
   </ol>
-  <p>This means that projected yields use only the <em>change signal</em> from the climate models, not their absolute values. However, the observed period 2001–2020 is computed differently: it is driven directly by AgERA5 observations rather than by a delta applied to the 1981–2000 baseline. The two periods are therefore not constructed in exactly the same way, which can lead to structural differences — in some regions, the sign of the change can flip between the observed and projected periods. This is a known feature of the GAEZ framework and should be kept in mind when comparing observed and projected maps.</p>
+  <p>In short, GAEZ&nbsp;v5 future projections are based on the <em>observed</em> 1981–2000 baseline climate plus <em>modelled</em> changes, not on raw climate-model values themselves.</p>
+
+  <h4>Why this matters</h4>
+  <p>The historical and future periods in GAEZ&nbsp;v5 are not constructed in exactly the same way. The 2001–2020 estimates are based directly on AgERA5, which represents the climate actually observed during those years. Future projections, by contrast, are generated with the delta method — taking the monthly climate change signal from bias-corrected CMIP6/ISIMIP3b models and applying it to the 1981–2000 AgERA5 baseline.</p>
+  <p>As a result, future maps should be interpreted as showing how the historical baseline climate would change under the modelled future signal, rather than as raw future climate-model output. This difference in construction matters when comparing observed and projected periods: part of the contrast reflects climate change itself, but part also reflects the fact that the two periods are generated differently. In some locations, this can contribute to differences in magnitude or even in the sign of change.</p>
 
   <br>
 
